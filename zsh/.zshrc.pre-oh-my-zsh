@@ -1,0 +1,10 @@
+HISTFILE=~/.histfile
+HISTSIZE=-1
+SAVEHIST=1000
+setopt appendhistory autocd beep extendedglob nomatch notify
+bindkey -e
+
+zstyle :compinstall filename '/home/richard/.zshrc'
+
+autoload -Uz compinit
+compinit
