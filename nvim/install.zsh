@@ -1,8 +1,11 @@
 #!/usr/bin/env zsh
-echo "Installing NeoVim..."
+echo "Going to install NeoVim"
 
+echo "Adding repo..."
 sudo add-apt-repository -y ppa:neovim-ppa/unstable
-sudo apt-get update
+echo "Updating..."
+sudo apt-get -qq update
+echo "Installing NeoVim..."
 sudo apt-get install -y neovim
 
 echo "Installing Python modules needed for NeoVim..."
