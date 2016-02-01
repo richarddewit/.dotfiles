@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 echo "  ____  _      _                   _ _";
 echo " |  _ \(_) ___| |__   __ _ _ __ __| ( )___";
 echo " | |_) | |/ __| '_ \ / _\` | '__/ _\` |// __|";
@@ -14,20 +14,21 @@ echo " Author: Richard de Wit";
 echo " Repo:   https://github.com/richarddewit/.dotfiles";
 echo
 
-THIS_PATH=`dirname $0:A`
+cd "${0%/*}"
 
-echo "Creating symlinks..."
-echo
-ln -sf ${THIS_PATH}/zsh/.zshrc ~/.zshrc
-ln -sf ${THIS_PATH}/zsh/.zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
+echo "Installing ZSH and Oh-My-ZSH..."
+sudo apt-get install -y zsh
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-ln -sf ${THIS_PATH}/vim/.vimrc ~/.vimrc
-# ln -sf ${THIS_PATH}/nvim/init.vim ~/.config/nvim/init.vim
+echo "Making ZSH the default shell"
+chsh -s $(which zsh)
+zsh
 
-ln -sf ${THIS_PATH}/vcs/.gitconfig ~/.gitconfig
-ln -sf ${THIS_PATH}/vcs/.gitignore_global ~/.gitignore_global
-ln -sf ${THIS_PATH}/vcs/.hgignore_global ~/.hgignore_global
-ln -sf ${THIS_PATH}/vcs/.hgrc ~/.hgrc
+chmod +x ./make_links.zsh
+chmod +x ./nvim/install.zsh
+
+./nvim/install.zsh
+./make_links.zsh
 
 echo "Done!"
 
