@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 echo "  ____  _      _                   _ _";
 echo " |  _ \(_) ___| |__   __ _ _ __ __| ( )___";
 echo " | |_) | |/ __| '_ \ / _\` | '__/ _\` |// __|";
@@ -15,14 +15,6 @@ echo " Repo:   https://github.com/richarddewit/.dotfiles";
 echo
 
 cd "${0%/*}"
-
-echo "Installing ZSH and Oh-My-ZSH..."
-sudo apt-get install -y zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
-echo "Making ZSH the default shell"
-chsh -s $(which zsh)
-zsh
 
 chmod +x ./make_links.zsh
 chmod +x ./nvim/install.zsh
