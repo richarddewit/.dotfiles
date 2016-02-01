@@ -3,3 +3,5 @@
 [user]
 	name = Richard de Wit
 	email = henk.exe@gmail.com
+[push]
+	default = simple
