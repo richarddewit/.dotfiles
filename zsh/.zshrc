@@ -7,8 +7,7 @@ source $DOTFILES/zsh/exports.zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="bullet-train"
 
-# Start FASD
-eval "$(fasd --init auto)"
+source $DOTFILES/zsh/autostarts.zsh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/

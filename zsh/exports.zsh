@@ -12,3 +12,5 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='atom'
 fi
+
+export NVM_DIR="/home/richard/.nvm"
