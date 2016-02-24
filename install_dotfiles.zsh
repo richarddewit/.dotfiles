@@ -19,6 +19,7 @@ cd "${0%/*}"
 chmod +x ./make_links.zsh
 chmod +x ./nvim/install.zsh
 
+./vim/install.zsh
 ./nvim/install.zsh
 ./make_links.zsh
 
