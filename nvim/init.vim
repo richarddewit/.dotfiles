@@ -29,8 +29,8 @@
     endif
 
 " Required:
-    set runtimepath+=~/.nvim/bundle/neobundle.vim/
-    set runtimepath+=~/.nvim/bundle/bolt.vim/
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
+    set runtimepath+=~/.vim/bundle/bolt.vim/
   endif
   filetype off
 

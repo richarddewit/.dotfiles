@@ -16,12 +16,20 @@ echo
 
 cd "${0%/*}"
 
-chmod +x ./make_links.zsh
-chmod +x ./nvim/install.zsh
+git submodule init
+git submodule update
 
-./vim/install.zsh
-./nvim/install.zsh
+chmod +x ./vim/install.zsh
+chmod +x ./nvim/install.zsh
+chmod +x ./make_links.zsh
+
+./vim/install.zsh &&
+./nvim/install.zsh &&
 ./make_links.zsh
+
+wget http://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme -O $ZSH/themes/bullet-train.zsh-theme
+sudo wget https://raw.githubusercontent.com/clvv/fasd/master/fasd -O /usr/bin/fasd
+sudo chmod +x /usr/bin/fasd
 
 echo "Done!"
 
