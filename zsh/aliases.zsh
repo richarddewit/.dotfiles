@@ -57,3 +57,8 @@ alias thg='run_bg thg'
 
 # Emacs
 alias gmacs='run_bg emacs $@'
+
+# Python (virtualenv)
+alias wo='workon'
+alias workoff='deactivate'
+alias wf='workoff'
