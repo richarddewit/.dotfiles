@@ -1,3 +1,8 @@
+function run_bg
+{
+  nohup "$@" &>/dev/null & disown %%
+}
+
 # Default alias 'ag' is bound to 'sudo apt-get'..
 if [ -f /usr/bin/ag ]; then
   # Use silversurfer-ag instead
@@ -48,11 +53,7 @@ alias vssh='vagrant ssh'
 alias vup='vagrant up'
 
 # TortoiseHG
-alias thg='(thg &> /dev/null &)'
+alias thg='run_bg thg'
 
 # Emacs
-function gmacs
-{
-  command `(emacs $1 &> /dev/null &)`
-}
-alias gmacs=gmacs
+alias gmacs='run_bg emacs $@'

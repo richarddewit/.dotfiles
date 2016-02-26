@@ -204,7 +204,7 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
 
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
   )
 
