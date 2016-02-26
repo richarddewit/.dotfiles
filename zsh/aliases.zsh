@@ -48,4 +48,11 @@ alias vssh='vagrant ssh'
 alias vup='vagrant up'
 
 # TortoiseHG
-alias thg='thg &>/dev/null'
+alias thg='(thg &> /dev/null &)'
+
+# Emacs
+function gmacs
+{
+  command `(emacs $1 &> /dev/null &)`
+}
+alias gmacs=gmacs
