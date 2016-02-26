@@ -14,3 +14,5 @@ ln -sf ${THIS_PATH}/vcs/.hgrc ~/.hgrc
 ln -sf ${THIS_PATH}/vim/.vimrc ~/.vimrc
 mkdir -p ~/.config/nvim
 ln -sf ${THIS_PATH}/nvim/init.vim ~/.config/nvim/init.vim
+
+ln -sf ${THIS_PATH}/emacs/.spacemacs ~/.spacemacs
