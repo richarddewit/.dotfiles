@@ -23,28 +23,49 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+
+     ;; 1 General layers
      auto-completion
-     ;; better-defaults
-     evil-commentary
-     emacs-lisp
-     ;; git
-     markdown
-     ;; org
-     javascript
-     react
-     html
-     python
-     django
+     colors
      (shell :variables
             shell-default-shell 'eshell
             shell-default-height 30
             shell-default-position 'bottom)
-     ;; spell-checking
      syntax-checking
      themes-megapack
+     ;; 2 Completion
+     ;; 3 Configuration files
+     salt
+     ;; 4 E-mail
+     ;; 5 Frameworks
+     django
+     react
+     ;; 6 Fun
+     ;; 7 IRC
+     ;; 8 Keyboard layouts
+     ;; 9 Programming languages
+     emacs-lisp
+     go
+     html
+     javascript
+     markdown
+     python
+     shell-scripts
+     ;; 10 Source control
+     git
      (version-control :variables
-                      version-control-diff-tool 'git-gutter
+                      version-control-diff-tool 'diff-hl
                       version-control-global-margin t)
+     ;; 11 Tools
+     fasd
+     ranger
+     vagrant
+     ;; 12 Vim
+     evil-commentary
+     unimpaired
+     vim-powerline
+     ;; 13 Window management
+
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -160,11 +181,11 @@ values."
    dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
-   dotspacemacs-fullscreen-use-non-native nil
+   dotspacemacs-fullscreen-use-non-native t
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup nil
+   dotspacemacs-maximized-at-startup t
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -204,7 +225,7 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
 
-  ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'load-path 'spacemacs//toggle-fill-column-indicator-on)
 
   )
 
@@ -213,8 +234,19 @@ user code."
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
 
-  (setq python-fill-column 80)
+  (setq
+   vc-follow-symlinks t
+   require-final-newline t
+   set-fill-column 80
+   )
 
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+  (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
+
+  (global-company-mode)
+  (global-diff-hl-mode t)
+  (linum-relative-global-mode)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
