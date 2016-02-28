@@ -27,8 +27,9 @@ values."
      ;; 1 General layers
      auto-completion
      colors
+     ;; org
      (shell :variables
-            shell-default-shell 'eshell
+            shell-default-shell 'shell
             shell-default-height 30
             shell-default-position 'bottom)
      syntax-checking
@@ -45,7 +46,7 @@ values."
      ;; 8 Keyboard layouts
      ;; 9 Programming languages
      emacs-lisp
-     go
+     ;; go
      html
      javascript
      markdown
@@ -54,7 +55,7 @@ values."
      ;; 10 Source control
      git
      (version-control :variables
-                      version-control-diff-tool 'diff-hl
+                      version-control-diff-tool 'git-gutter
                       version-control-global-margin t)
      ;; 11 Tools
      fasd
@@ -185,7 +186,7 @@ values."
    ;; If non nil the frame is maximized when Emacs starts up.
    ;; Takes effect only if `dotspacemacs-fullscreen-at-startup' is nil.
    ;; (default nil) (Emacs 24.4+ only)
-   dotspacemacs-maximized-at-startup t
+   dotspacemacs-maximized-at-startup nil
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -225,8 +226,6 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
 
-  (add-to-list 'load-path 'spacemacs//toggle-fill-column-indicator-on)
-
   )
 
 (defun dotspacemacs/user-config ()
@@ -238,6 +237,7 @@ layers configuration. You are free to put any user code."
    vc-follow-symlinks t
    require-final-newline t
    set-fill-column 80
+   scroll-margin 20
    )
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
