@@ -3,6 +3,7 @@ THIS_PATH=`dirname $0:A`
 
 echo "Creating symlinks..."
 echo
+ln -sf ${THIS_PATH}/zsh/.zshenv ~/.zshenv
 ln -sf ${THIS_PATH}/zsh/.zshrc ~/.zshrc
 ln -sf ${THIS_PATH}/zsh/.zshrc.pre-oh-my-zsh ~/.zshrc.pre-oh-my-zsh
 
