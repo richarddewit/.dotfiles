@@ -32,7 +32,8 @@ values."
             shell-default-shell 'shell
             shell-default-height 30
             shell-default-position 'bottom)
-     syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-by-default t)
      themes-megapack
      ;; 2 Completion
      ;; 3 Configuration files
@@ -62,7 +63,7 @@ values."
      ranger
      vagrant
      ;; 12 Vim
-     evil-commentary
+     ;; evil-commentary
      unimpaired
      vim-powerline
      ;; 13 Window management
@@ -236,7 +237,6 @@ layers configuration. You are free to put any user code."
   (setq
    vc-follow-symlinks t
    require-final-newline t
-   set-fill-column 80
    scroll-margin 20
    )
 
@@ -245,7 +245,8 @@ layers configuration. You are free to put any user code."
   (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
 
   (global-company-mode)
-  (global-diff-hl-mode t)
+  (global-git-gutter-mode t)
+  (global-flycheck-mode t)
   (linum-relative-global-mode)
 )
 
