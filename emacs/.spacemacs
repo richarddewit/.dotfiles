@@ -65,7 +65,7 @@ values."
      ;; 12 Vim
      ;; evil-commentary
      unimpaired
-     ;; vim-powerline
+     vim-powerline
      ;; 13 Window management
 
      )
