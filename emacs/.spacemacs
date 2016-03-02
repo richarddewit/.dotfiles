@@ -241,19 +241,29 @@ layers configuration. You are free to put any user code."
    frame-title-format "Spacemacs %* %f"
    )
 
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (add-hook 'focus-out-hook
-            (defun save-current-buffer-if-needed ()
-              (interactive)
-              (when (and (buffer-file-name) (buffer-modified-p))
-                (save-buffer))))
-
-  (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
-
   (global-company-mode)
   (global-git-gutter-mode t)
   (global-flycheck-mode t)
   (linum-relative-global-mode)
+
+  (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
+
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+  ;; Autosave on buffer/window/frame switch
+  (defun save-buffer-if-needed ()
+    (interactive)
+    (when (and (buffer-file-name) (buffer-modified-p))
+      (save-buffer)))
+
+  (defadvice switch-to-buffer (before save-buffer-now activate)
+    (when buffer-file-name (save-buffer-if-needed)))
+  (defadvice other-window (before other-window-now activate)
+    (when buffer-file-name (save-buffer-if-needed)))
+  (defadvice other-frame (before other-frame-now activate)
+    (when buffer-file-name (save-buffer-if-needed)))
+
 
   ;; Indenting guide
   (indent-guide-global-mode)
