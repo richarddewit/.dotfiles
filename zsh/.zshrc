@@ -1,4 +1,3 @@
-export DOTFILES=~/.dotfiles
 source $DOTFILES/zsh/exports.zsh
 
 # Set name of the theme to load.
