@@ -6,4 +6,4 @@ export LANG=en_US.UTF-8
 
 export EDITOR="gmacs"
 
-export NVM_DIR="/home/richard/.nvm"
+export NVM_DIR="$HOME/.nvm"
