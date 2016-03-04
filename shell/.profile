@@ -12,7 +12,7 @@
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+      . "$HOME/.bashrc"
     fi
 fi
 
@@ -20,3 +20,8 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+# Set Caps Lock to be an additional Ctrl
+setxkbmap -option 'caps:ctrl_modifier'
+# Set all Ctrls to behave like Esc when tapped
+xcape -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape'
