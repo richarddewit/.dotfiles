@@ -17,3 +17,5 @@ mkdir -p ~/.config/nvim
 ln -sf ${THIS_PATH}/nvim/init.vim ~/.config/nvim/init.vim
 
 ln -sf ${THIS_PATH}/emacs/.spacemacs ~/.spacemacs
+
+ln -sf ${THIS_PATH}/shell/.profile ~/.profile
