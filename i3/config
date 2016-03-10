@@ -130,17 +130,15 @@ bindsym $mod+Control+l move workspace to output right
 bindsym $mod+Control+Right move workspace to output right
 
 # assign programs
-assign [class="Google-chrome"] → $tag2
-assign [class="Chromium"] → $tag2
-assign [class="Emacs"] → $tag1
-assign [class="Wine"] → $tag9
+assign [class="(G|g)oogle-chrome"] → $tag2
+assign [class="(C|c)hromium"] → $tag2
+assign [class="(E|e)macs"] → $tag1
+assign [class="(W|w)ine"] → $tag9
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -201,5 +199,20 @@ bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_screenshot.png' -e 'mv $f ~/Pictures
 
 # Startup applications
 exec_always --no-startup-id numlockx on
-exec --no-startup-id cinnamon-settings-daemon
-exec --no-startup-id nitrogen --restore
+
+# Shutdown mode
+set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (q) shutdown
+set $i3exit ~/.i3/i3exit.sh
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $i3exit lock, mode "default"
+    bindsym e exec --no-startup-id $i3exit logout, mode "default"
+    bindsym s exec --no-startup-id $i3exit suspend, mode "default"
+    bindsym r exec --no-startup-id $i3exit reboot, mode "default"
+    bindsym q exec --no-startup-id $i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+BackSpace mode "$mode_system"
