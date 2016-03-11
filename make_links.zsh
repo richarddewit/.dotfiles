@@ -20,3 +20,5 @@ ln -sf ${THIS_PATH}/emacs/.spacemacs ~/.spacemacs
 
 ln -sf ${THIS_PATH}/shell/.profile ~/.profile
 ln -sf ${THIS_PATH}/i3 ~/.i3
+mkdir -p ~/.config/gtk-3.0
+ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini
