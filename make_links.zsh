@@ -19,6 +19,12 @@ ln -sf ${THIS_PATH}/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ${THIS_PATH}/emacs/.spacemacs ~/.spacemacs
 
 ln -sf ${THIS_PATH}/shell/.profile ~/.profile
-ln -sf ${THIS_PATH}/i3 ~/.i3
+ln -sf ${THIS_PATH}/X/.xinitrc ~/.xinitrc
+ln -sf ${THIS_PATH}/X/.xprofile ~/.xprofile
+ln -sf ${THIS_PATH}/X/.Xresources ~/.Xresources
+
+if [ ! -d ~/.i3 ]; then
+  ln -sf ${THIS_PATH}/i3 ~/.i3
+fi
 mkdir -p ~/.config/gtk-3.0
 ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini

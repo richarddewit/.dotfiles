@@ -1,0 +1,7 @@
+#!/bin/sh
+
+[[ -f ~/.Xresources ]] && xrdb -merge -I $HOME ~/.Xresources
+
+xset r rate 200 50
+xsetroot -mod 16 16 -fg '#20282c' -bg '#10181c'
+
