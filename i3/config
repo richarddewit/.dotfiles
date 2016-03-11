@@ -19,7 +19,7 @@ set $mod Mod4
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
-font pango:Ubuntu Mono 9
+font pango:Ubuntu Mono, Awesome 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -143,6 +143,7 @@ assign [class="(W|w)ine"] → $tag9
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+bindsym $mod+Shift+d exec --no-startup-id killall dunst; exec --no-startup-id notify-send 'restart dunst'
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
