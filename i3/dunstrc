@@ -1,5 +1,5 @@
 [global]
-    font = "Monospace 8"
+    font = "Ubuntu Mono, Awesome 10"
     allow_markup = yes
     format = "<b>%a: %s</b>\n%b\n%p"
     sort = yes
@@ -13,8 +13,8 @@
     # follow = mouse
     word_wrap = yes
     separator_height = 2
-    padding = 10
-    horizontal_padding = 10
+    padding = 20
+    horizontal_padding = 50
     separator_color = frame
     startup_notification = true
 
@@ -25,16 +25,16 @@
     history = mod4+grave
 
 [urgency_low]
-    background = "#404040"
-    foreground = "#CCCCCC"
+    background = "#34495E"
+    foreground = "#ECF0F1"
     timeout = 10
 
 [urgency_normal]
-    background = "#859900"
-    foreground = "#DDDDDD"
+    background = "#2ECC71"
+    foreground = "#2C3E50"
     timeout = 10
 
 [urgency_critical]
-    background = "#dc322f"
-    foreground = "#DDDDDD"
+    background = "#E74C3C"
+    foreground = "#ECF0F1"
     timeout = 0
