@@ -64,10 +64,15 @@ PERCENT=`echo $(( $REM * 100 / $FULL ))`
 MESSAGE="\nFeed me!\n\nOnly ${PERCENT}% juice remaining!"
 
 # set energy limit in percent, where warning should be displayed
-LIMIT="85"
+WARNING_LIMIT="10"
+CRITICAL_LIMIT="5"
 
 # show warning if energy limit in percent is less then user set limit and
 # if battery is discharging
-if [ $PERCENT -le "$(echo $LIMIT)" ] && [ "$STAT" == "Discharging" ]; then
-  notify-send -u critical "Battery warning" "$MESSAGE"
+if [ "$STAT" == "Discharging" ]; then
+  if [ $PERCENT -le "$(echo $CRITICAL_LIMIT)" ]; then
+    notify-send -u critical "Battery level critical" "$MESSAGE"
+  elif [ $PERCENT -le "$(echo $WARNING_LIMIT)" ]; then
+    notify-send -u critical "Battery level low" "$MESSAGE"
+  fi
 fi
