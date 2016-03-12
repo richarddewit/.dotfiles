@@ -1,3 +1,4 @@
+! Colorscheme ----------------------------------------------------------------
 ! Base16 Flat
 ! Scheme: Chris Kempson (http://chriskempson.com)
 
@@ -16,7 +17,7 @@
 #define base0C #1ABC9C
 #define base0D #3498DB
 #define base0E #9B59B6
-#define base0F #be643c
+#define base0F #BE643C
 
 *.foreground:   base05
 *.background:   base00
@@ -49,6 +50,36 @@
 *.color20:      base04
 *.color21:      base06
 
-! Cursors
+
+! Xcursor --------------------------------------------------------------------
 Xcursor.theme: DMZ-White
 Xcursor.size: 16
+
+
+! Xft settings ---------------------------------------------------------------
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintslight
+
+
+! Terminal settings ----------------------------------------------------------
+UXTerm*faceName: Hack
+UXTerm*boldFont: Hack Bold
+UXTerm*faceSize: 8
+
+UXTerm*fontMenu*fontdefault*Label: Default
+UXTerm*loginshell: 1
+UXTerm*locale: 1
+UXTerm*utf8: 1
+UXTerm*utf8Title: 1
+
+UXTerm*scrollttyoutput:false
+UXTerm*ScrollTTYKeypress:true
+
+UXterm*saveLines: 32768
+UXTerm*borderWidth: 0
+UXTerm*scrollBar: 0
+UXTerm*xftAntialias: 1
+
