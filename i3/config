@@ -25,7 +25,7 @@ font pango:Ubuntu Mono, Awesome 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id sakura
+bindsym $mod+Return exec --no-startup-id uxterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -96,7 +96,7 @@ set $tag4 "4"
 set $tag5 "5"
 set $tag6 "6"
 set $tag7 "7"
-set $tag8 "8"
+set $tag8 "8: mail"
 set $tag9 "9: wine"
 set $tag10 "10"
 
@@ -135,7 +135,7 @@ assign [class="(E|e)macs"] → $tag1
 assign [class="(G|g)oogle-chrome"] → $tag2
 assign [class="(C|c)hromium"] → $tag2
 assign [class="Thg"] → $tag3
-assign [class="Nylas N1"] → $tag3
+assign [class="Nylas N1"] → $tag8
 assign [class="Pidgin"] → $tag3
 assign [class="(W|w)ine"] → $tag9
 
@@ -171,34 +171,56 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+
+# Color definitions - Base16 Flat
+# http://chriskempson.github.io/base16/#flat
+set $base00 #2C3E50
+set $base01 #34495E
+set $base02 #7F8C8D
+set $base03 #95A5A6
+set $base04 #BDC3C7
+set $base05 #E0E0E0
+set $base06 #f5f5f5
+set $base07 #ECF0F1
+set $base08 #E74C3C
+set $base09 #E67E22
+set $base0A #F1C40F
+set $base0B #2ECC71
+set $base0C #1ABC9C
+set $base0D #3498DB
+set $base0E #9B59B6
+set $base0F #BE643C
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     colors {
         # Whole color settings
-        background #000000
-        statusline #ffffff
-        separator  #666666
+        background $base00
+        statusline $base05
+        separator  $base03
 
         # Type             border  background font
-        focused_workspace  #008fff #007fff #ffffff
-        active_workspace   #333333 #5f676a #ffffff
-        inactive_workspace #333333 #222222 #888888
-        urgent_workspace   #aa0000 #990000 #ffffff
+        focused_workspace  $base0C $base0B    $base01
+        active_workspace   $base01 $base02    $base05
+        inactive_workspace $base00 $base01    $base04
+        urgent_workspace   $base09 $base08    $base05
     }
     position bottom
     status_command i3status --config ~/.i3/i3status.conf
 }
 
 # Colors
-client.focused #007fbf #007fbf #ffffff
-client.unfocused #666666 #666666 #ffffff
-client.urgent #aa0000 #990000 #ffffff
+# clientclass     border  backgr. text    indicator
+client.focused    $base0C $base0B $base01 $base0D
+client.unfocused  $base03 $base02 $base05
+client.urgent     $base09 $base08 $base05
 
 hide_edge_borders true
 
 # Custom bindings
 bindsym $mod+x workspace back_and_forth
+bindsym $mod+Tab workspace back_and_forth
 bindsym Control+mod1+l exec sh ~/.i3/i3lock.sh
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_screenshot.png' -e 'mv $f ~/Pictures/screenshots/'
 

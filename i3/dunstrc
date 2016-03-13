@@ -26,15 +26,15 @@
 
 [urgency_low]
     background = "#34495E"
-    foreground = "#ECF0F1"
+    foreground = "#E0E0E0"
     timeout = 10
 
 [urgency_normal]
-    background = "#2ECC71"
-    foreground = "#2C3E50"
+    background = "#3498DB"
+    foreground = "#E0E0E0"
     timeout = 10
 
 [urgency_critical]
     background = "#E74C3C"
-    foreground = "#ECF0F1"
+    foreground = "#E0E0E0"
     timeout = 0
