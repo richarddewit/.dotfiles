@@ -19,7 +19,7 @@ set $mod Mod4
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
-font pango:Ubuntu Mono, Awesome 10
+font pango:DejaVu Sans Mono, Awesome 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -89,15 +89,15 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # Name the workspaces
-set $tag1 "1: dev"
-set $tag2 "2: www"
-set $tag3 "3"
+set $tag1 "1  "
+set $tag2 "2  "
+set $tag3 "3  "
 set $tag4 "4"
 set $tag5 "5"
 set $tag6 "6"
-set $tag7 "7"
-set $tag8 "8: mail"
-set $tag9 "9: wine"
+set $tag7 "7  "
+set $tag8 "8  "
+set $tag9 "9  "
 set $tag10 "10"
 
 # switch to workspace
@@ -131,13 +131,30 @@ bindsym $mod+Control+l move workspace to output right
 bindsym $mod+Control+Right move workspace to output right
 
 # assign programs
-assign [class="(E|e)macs"] → $tag1
-assign [class="(G|g)oogle-chrome"] → $tag2
-assign [class="(C|c)hromium"] → $tag2
-assign [class="Thg"] → $tag3
-assign [class="Nylas N1"] → $tag8
-assign [class="Pidgin"] → $tag3
-assign [class="(W|w)ine"] → $tag9
+assign [class="(?i)Emacs"] → $tag1
+assign [class="(?i)Atom"] → $tag1
+assign [class="(?i)Google-chrome"] → $tag2
+assign [class="(?i)Chromium"] → $tag2
+assign [class="(?i)Thg"] → $tag4
+assign [class="(?i)Pidgin"] → $tag7
+assign [class="(?i)Nylas N1"] → $tag8
+assign [class="(?i)Wine"] → $tag9
+
+# fix graphics glitch
+# new_window none
+
+# Open specific applications in floating mode
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
+for_window [title="alsamixer"] floating enable border pixel 2
+for_window [class="Galculator"] floating enable border pixel 2
+for_window [class="GParted"] floating enable border normal
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -190,33 +207,46 @@ set $base0C #1ABC9C
 set $base0D #3498DB
 set $base0E #9B59B6
 set $base0F #BE643C
+set $black #2C3E50
+set $white #E0E0E0
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
+    # status_command i3blocks
+    i3bar_command i3bar -t
+    font pango: FontAwesome, Hack 11
+    # strip_workspace_numbers yes
+    separator_symbol "■"
+    tray_padding 0
+
     colors {
         # Whole color settings
         background $base00
-        statusline $base05
-        separator  $base03
+        statusline $base04
+        separator  $base00
 
-        # Type             border  background font
-        focused_workspace  $base0C $base0B    $base01
-        active_workspace   $base01 $base02    $base05
-        inactive_workspace $base00 $base01    $base04
-        urgent_workspace   $base09 $base08    $base05
+        # Type             border  bg      text
+        focused_workspace  $base0D $base0D $white
+        active_workspace   $base0D $base00 $base02
+        inactive_workspace $base01 $base00 $base02
+        urgent_workspace   $base09 $base08 $white
     }
     position bottom
-    status_command i3status --config ~/.i3/i3status.conf
+    status_command py3status --config ~/.i3/i3status.conf
 }
 
 # Colors
-# clientclass     border  backgr. text    indicator
-client.focused    $base0C $base0B $base01 $base0D
-client.unfocused  $base03 $base02 $base05
-client.urgent     $base09 $base08 $base05
+# Type            border  bg      text    indicator
+client.focused    $base0D $base0D $white $base0B
+client.unfocused  $base03 $base02 $white
+client.urgent     $base09 $base08 $white
 
 hide_edge_borders true
+
+# Set inner/outer gaps
+gaps inner 20
+gaps outer 0
 
 # Custom bindings
 bindsym $mod+x workspace back_and_forth
