@@ -116,8 +116,9 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(darktooth
+                         ujelly
                          spacemacs-dark
-                         solarized-dark
+                         niflheim
                          monokai
                          zenburn)
    ;; If non nil the cursor color matches the state color.
@@ -192,7 +193,7 @@ values."
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
-   dotspacemacs-active-transparency 90
+   dotspacemacs-active-transparency 98
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's inactive or deselected.
    ;; Transparency can be toggled through `toggle-transparency'. (default 90)
@@ -240,16 +241,24 @@ layers configuration. You are free to put any user code."
    require-final-newline t
    scroll-margin 20
    frame-title-format "Spacemacs %* %f"
+   js2-include-node-externs t
    )
 
   (global-company-mode)
   (global-git-gutter-mode t)
   (global-flycheck-mode t)
   (linum-relative-global-mode)
+  (highlight-indentation-mode)
+  ;; (spacemacs/toggle-highlight-current-line-globally-off)
+  ;; (spacemacs/toggle-automatic-symbol-highlight-on)
+  ;; (spacemacs/toggle-transparent-frame)
 
   (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
 
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'python-mode-hook
+            (lambda ()
+              (setq-local completion-at-point-functions nil)))
 
 
   ;; Autosave on buffer/window/frame switch
@@ -287,7 +296,7 @@ layers configuration. You are free to put any user code."
 
   ;; Indentation from
   ;; http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html
-  (defun my-setup-indent (n)
+  (defun set-indent-level (n)
     ;; web development
     (setq coffee-tab-width n) ; coffeescript
     (setq javascript-indent-level n) ; javascript-mode
@@ -299,16 +308,43 @@ layers configuration. You are free to put any user code."
     (setq css-indent-offset n) ; css-mode
     )
 
-  (defun personal-code-style ()
+  (defun setup-indentation ()
     (interactive)
     (message "Indentation set to two")
     (setq indent-tabs-mode nil) ; use space instead of tab
-    (my-setup-indent 2) ; indent 2 spaces width
+    (set-indent-level 2) ; indent 2 spaces width
     )
 
-  ;; call indentation
-  (personal-code-style)
-)
+  (setup-indentation)
+
+
+  ;; Disable mouse
+  (defun silence ()
+    (interactive))
+
+  ;; don't jump the cursor around in the window on clicking
+  (define-key evil-motion-state-map [down-mouse-1] 'silence)
+  (define-key evil-motion-state-map [down-mouse-3] 'silence)
+  ;; also avoid any '<mouse-x> is undefined' when setting to 'undefined
+  (define-key evil-motion-state-map [mouse-1] 'silence)
+  (define-key evil-motion-state-map [mouse-3] 'silence)
+  ;; Disable scrolling
+  (define-key evil-motion-state-map [mouse-4] 'silence)
+  (define-key evil-motion-state-map [mouse-5] 'silence)
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(js2-strict-trailing-comma-warning nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
