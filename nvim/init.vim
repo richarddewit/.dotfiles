@@ -99,6 +99,7 @@
   \   },
   \ }
   NeoBundle 'tomtom/tcomment_vim'
+  NeoBundle 'terryma/vim-expand-region'
   NeoBundle 'terryma/vim-multiple-cursors'
   NeoBundle 'blacktorn/vim-endwise'
   NeoBundle 'tpope/vim-eunuch'
@@ -160,8 +161,9 @@
   set wildmode=full
   set wildignore+=*/tmp/*,*.so,*.swp,*.pyc,*.zip
 " leader is ,
-  let mapleader = ','
-  let gmapleader = ','
+  let mapleader = '\'
+  let gmapleader = '\'
+  map <Space> <leader>
   set undofile
   set undodir="$HOME/.VIM_UNDO_FILES"
   set backupdir=~/.backups,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -209,18 +211,27 @@
   noremap J 5j
   noremap K 5k
 
-  " nnoremap : ;
-  nnoremap ; :
   map <Esc> :noh<Cr>
   noremap <C-/> :TComment<Cr>
+  noremap <Leader>; :TComment<Cr>
+
+  " Faster save
+  nnoremap <Leader>w :w<CR>
 
 " Copy to clipboard
-  vnoremap <C-c> "+y<CR>
+  vmap <Leader>y "+y
+  vmap <Leader>d "+d
+  nmap <Leader>p "+p
+  nmap <Leader>P "+P
+  vmap <Leader>p "+p
+  vmap <Leader>P "+P
+
 " Indent and keep selection
   vmap < <gv
   vmap > >gv
 
-  noremap <leader>f :Autoformat<CR>
+  vmap v <Plug>(expand_region_expand)
+  vmap <C-v> <Plug>(expand_region_shrink)
 
   nnoremap <F3> :<C-u>GundoToggle<CR>
 
@@ -274,8 +285,11 @@
   nmap <leader>t :term<Cr>
 " Move to the next buffer
   nmap <leader>, :bnext<CR>
+  nmap <leader><Tab> :bnext<CR>
+  nmap <leader>bd :bdelete<CR>
 " Move to the previous buffer
   nmap <leader>. :bprevious<CR>
+  nmap <leader><S-Tab> :bprevious<CR>
   let g:airline#extensions#tabline#buffer_idx_mode = 1
 
   nmap <leader>1 <Plug>AirlineSelectTab1
@@ -330,8 +344,8 @@
 " Folding ----------------------------------------------------------------- {{{
 
 " Space to toggle folds.
-  nnoremap <Space> za
-  vnoremap <Space> za
+  nnoremap <Leader><Space> za
+  vnoremap <Leader><Space> za
 
   set foldmethod=marker
   set foldlevelstart=0
@@ -439,6 +453,19 @@ command! -nargs=0 Pulse call s:Pulse()
 
 " Other packages settings  -------------------------------------------------{{{
 
+" vim-expand-region
+  let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ 'il'  :0,
+      \ 'ip'  :0,
+      \ 'ie'  :0,
+      \ }
 " vim-signify
   let g:signify_update_on_bufenter=0
 " vim-startify
