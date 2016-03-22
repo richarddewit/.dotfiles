@@ -30,5 +30,8 @@ ln -sf ${THIS_PATH}/i3/i3exit.sh ~/.i3/i3exit.sh
 ln -sf ${THIS_PATH}/i3/i3lock.sh ~/.i3/i3lock.sh
 ln -sf ${THIS_PATH}/i3/i3status.conf ~/.i3/i3status.conf
 ln -sf ${THIS_PATH}/i3/dunstrc ~/.config/dunst/dunstrc
+if [ ! -d ~/.i3/lemonbar ]; then
+  ln -sf ${THIS_PATH}/i3/lemonbar ~/.i3/lemonbar
+fi
 
 ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini

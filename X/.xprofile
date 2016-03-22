@@ -1,7 +1,14 @@
 #!/bin/sh
 
-[[ -f ~/.Xresources ]] && xrdb -merge -I $HOME ~/.Xresources
+compton --config "$HOME/.config/compton/compton.conf" &
+
+[[ -f ~/.Xresources ]] && xrdb -load "$HOME/.Xresources"
 
 xset r rate 200 50
 xsetroot -mod 16 16 -fg '#20282c' -bg '#10181c'
+
+# Set Caps Lock to be an additional Ctrl
+setxkbmap -option 'caps:ctrl_modifier'
+# Set all Ctrls to behave like Esc when tapped
+xcape -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape'
 

@@ -1,0 +1,98 @@
+#!\bin\bash
+# i3 panel config. Powerline style.
+
+panel_fifo="/tmp/i3_lemonbar_${USER}"
+geometry="1920x32"
+font="Hack-8"
+iconfont="FontAwesome-11"
+res_w=$(xrandr | grep "current" | awk '{print $8a}')
+
+# Alarm settings
+cpu_alert=20                        # % cpu use
+mem_alert=80                        # % mem use
+net_alert=5                         # K net use
+
+# update setting, in seconds (conky update in i3_lemonbar_conky
+upd_vol=3                           # Volume update
+upd_mail=300                        # Mail check update
+upd_mpd=5                           # MPD song update
+upd_bat=5                           # Battey update
+upd_ssid=5                          # SSID update
+
+# --- APPLY XRES BEGIN
+c_magenta_l="#ff9B59B6"
+c_blue_l="#ff3498DB"
+c_red_d="#ffE74C3C"
+c_cyan_d="#ff1ABC9C"
+c_blue_d="#ff3498DB"
+c_cursor="#ffE0E0E0"
+c_red_l="#ffE74C3C"
+c_green_l="#ff2ECC71"
+c_background="#ff2C3E50"
+c_green_d="#ff2ECC71"
+c_cyan_l="#ff1ABC9C"
+c_yellow_d="#ffF1C40F"
+c_foreground="#ffE0E0E0"
+c_black_l="#ff95A5A6"
+c_yellow_l="#ffF1C40F"
+c_black_d="#ff2C3E50"
+c_white_d="#ffE0E0E0"
+c_white_l="#ffECF0F1"
+c_magenta_d="#ff9B59B6"
+# --- APPLY XRES END
+
+# color definitions
+
+# Dark
+color_bgdark="$c_background"
+color_bgdarkhl="$c_black_d"
+color_fgdark="$c_black_l"
+
+# Light
+color_bglight="$c_white_l"
+color_bglighthl="$c_white_d"
+color_fglight="$c_foreground"
+
+# Accent
+color_accent1="$c_green_d"
+color_accent1text="$c_black_l"
+
+color_back="$color_bgdark"      # Default background
+color_fore="$color_fglight"     # Default foreground
+color_head="$color_bgdark"      # Background for unselected workspaces
+color_wsp="$color_bgdarkhl"     # Background for selected workspace
+color_icon="$color_fglight"     # For icons
+color_clockbg="$color_bglight"  # Color for clock
+color_clockfg="$color_fgdark"   # Color for clock
+
+color_success="$c_green_l"      # Positive color for good times
+color_warning="$c_yellow_l"     # Yellow color for warnings (eg, low battery)
+color_critical="$c_red_l"       # Red color for critical meters
+
+#default space between sections
+# stab='  '
+stab='  '
+
+# Char glyps for powerline fonts
+# Not used at the moment
+sep_left=" "                        # Powerline separator left
+sep_right=" "                       # Powerline separator right
+sep_l_left=" "                      # Powerline light separator left
+sep_l_right=" "                     # Powerline light sepatator right
+
+icon_battery="    "
+icon_clock=""                        # Clock icon
+icon_calendar=""
+icon_home=""                         # Home icon
+icon_cpu=""                          # CPU icon
+icon_linux=""                        # Linux (Tux) icon
+icon_mail=""                         # Email icon
+icon_mem=""                          # Memory icon
+icon_music=""                        # Music icon
+icon_prog=""                         # Window icon
+icon_shell=""                        # Shell icon
+icon_vol=""                          # Volume icon
+icon_mute=""
+icon_charging=""
+icon_wlan=""
+icon_eth=""
