@@ -5,7 +5,7 @@ echo "Creating symlinks..."
 echo
 
 # Create necessary folders in config dir
-mkdir -p ~/{.i3,.config/{nvim,dunst,gtk-3.0}}
+mkdir -p ~/{.i3,.config/{nvim,compton,dunst,gtk-3.0}}
 
 ln -sf ${THIS_PATH}/zsh/.zshenv ~/.zshenv
 ln -sf ${THIS_PATH}/zsh/.zshrc ~/.zshrc
@@ -24,6 +24,7 @@ ln -sf ${THIS_PATH}/shell/.profile ~/.profile
 ln -sf ${THIS_PATH}/X/.xinitrc ~/.xinitrc
 ln -sf ${THIS_PATH}/X/.xprofile ~/.xprofile
 ln -sf ${THIS_PATH}/X/.Xresources ~/.Xresources
+ln -sf ${THIS_PATH}/X/compton.conf ~/.config/compton/compton.conf
 
 ln -sf ${THIS_PATH}/i3/config ~/.i3/config
 ln -sf ${THIS_PATH}/i3/i3exit.sh ~/.i3/i3exit.sh
@@ -32,6 +33,10 @@ ln -sf ${THIS_PATH}/i3/i3status.conf ~/.i3/i3status.conf
 ln -sf ${THIS_PATH}/i3/dunstrc ~/.config/dunst/dunstrc
 if [ ! -d ~/.i3/lemonbar ]; then
   ln -sf ${THIS_PATH}/i3/lemonbar ~/.i3/lemonbar
+fi
+
+if [ ! -d ~/scripts ]; then
+  ln -sf ${THIS_PATH}/scripts ~/scripts
 fi
 
 ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini
