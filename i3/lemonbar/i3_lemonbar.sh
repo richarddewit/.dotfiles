@@ -21,7 +21,7 @@ mkfifo "${panel_fifo}"
 xtitle -s | sed -un 's/\(.*\)/WIN\1/p' > "${panel_fifo}" &
 
 # i3 Workspaces, "WSP"
-$(dirname $0)/i3_workspaces.py > ${panel_fifo} &
+$(dirname $0)/i3_workspaces.sh > ${panel_fifo} &
 
 # Conky, "SYS"
 conky -c $(dirname $0)/i3_lemonbar_conky > "${panel_fifo}" &

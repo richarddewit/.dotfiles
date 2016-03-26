@@ -135,13 +135,16 @@ while read -r line ; do
       while [ $# -gt 0 ] ; do
         case $1 in
          FOC*)
-           wsp="${wsp}%{+u B${color_bgdarkhl} U${color_accent1} T1}   ${1#???}   %{-u B${color_bgdark} F${color_fglight}}"
+           wsp="${wsp}%{+u B${color_bgdarkhl} U${color_accent1} T1}  ${1#???}  %{-u B${color_bgdark} F${color_fglight}}"
            ;;
-         INA*|ACT*)
-           wsp="${wsp}%{F${color_fglight} T1}   ${1#???}   "
+         ACT*)
+           wsp="${wsp}%{+u B${color_bgdarkhl} U${color_accentd} T1}  ${1#???}  %{-u B${color_bgdark} F${color_fglight}}"
+           ;;
+         INA*)
+           wsp="${wsp}%{F${color_fgdark} T1}  ${1#???}  "
            ;;
          URG*)
-           wsp="${wsp}%{F${color_fglight} T1}   ${1#???}   "
+           wsp="${wsp}%{F${color_fglight} B${c_red_d} T1}  ${1#???}  "
            ;;
         esac
         shift

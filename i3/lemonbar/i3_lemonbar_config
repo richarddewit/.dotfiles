@@ -56,6 +56,8 @@ color_fglight="$c_foreground"
 # Accent
 color_accent1="$c_green_d"
 color_accent1text="$c_black_l"
+color_accentd="$c_blue_d"
+color_accent1text="$c_black_l"
 
 color_back="$color_bgdark"      # Default background
 color_fore="$color_fglight"     # Default foreground
