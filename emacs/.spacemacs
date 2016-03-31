@@ -47,6 +47,7 @@ values."
      ;; 8 Keyboard layouts
      ;; 9 Programming languages
      emacs-lisp
+     extra-langs
      ;; go
      html
      javascript
@@ -61,7 +62,7 @@ values."
      ;; 11 Tools
      fasd
      ranger
-     vagrant
+     ;; vagrant
      ;; 12 Vim
      ;; evil-commentary
      unimpaired
@@ -77,7 +78,8 @@ values."
    '(
      darktooth-theme
      py-isort
-    )
+     avy
+     )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -240,25 +242,37 @@ layers configuration. You are free to put any user code."
    vc-follow-symlinks t
    require-final-newline t
    scroll-margin 20
-   frame-title-format "Spacemacs %* %f"
+   ;; frame-title-format "Spacemacs %* %f"
+   frame-title-format '("Spacemacs  %*  "
+                        (:eval (if (buffer-file-name)
+                                   (abbreviate-file-name (buffer-file-name))
+                                 "%b")))
    js2-include-node-externs t
    )
 
-  (global-company-mode)
+  (global-company-mode t)
   (global-git-gutter-mode t)
   (global-flycheck-mode t)
-  (linum-relative-global-mode)
-  (highlight-indentation-mode)
+  (linum-relative-global-mode t)
+  (highlight-indentation-mode t)
   ;; (spacemacs/toggle-highlight-current-line-globally-off)
   ;; (spacemacs/toggle-automatic-symbol-highlight-on)
   ;; (spacemacs/toggle-transparent-frame)
 
+  ;; Specific modes for specific files
   (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
+  (add-to-list 'auto-mode-alist '("\\.*.eslintrc\\'" . json-mode))
 
+
+  ;; Hooks
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'python-mode-hook
             (lambda ()
               (setq-local completion-at-point-functions nil)))
+  (add-hook 'react-mode-hook 'emmet-mode)
+  (add-hook 'react-mode-hook
+          (lambda ()
+            (setq-local emmet-expand-jsx-className? t)))
 
 
   ;; Autosave on buffer/window/frame switch
@@ -273,6 +287,38 @@ layers configuration. You are free to put any user code."
     (when buffer-file-name (save-buffer-if-needed)))
   (defadvice other-frame (before other-frame-now activate)
     (when buffer-file-name (save-buffer-if-needed)))
+
+
+  ;; Hide ignored folders/files
+  (defadvice completion--file-name-table (after
+                                          ignoring-backups-f-n-completion
+                                          activate)
+    "Filter out results when they match `completion-ignored-extensions'."
+    (let ((res ad-return-value))
+      (if (and (listp res)
+               (stringp (car res))
+               (cdr res))                 ; length > 1, don't ignore sole match
+          (setq ad-return-value
+                (completion-pcm--filename-try-filter res)))))
+
+  ;; Dired - hide ignored folders/files
+  (eval-after-load "dired" '(require 'dired-x))
+  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+
+  ;; Dired - sort folders first
+  (defun dired-sort-dirs-first ()
+    "Sort dired listings with directories first."
+    (save-excursion
+      (let (buffer-read-only)
+        (forward-line 2) ;; beyond dir. header
+        (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+      (set-buffer-modified-p nil)))
+
+  (defadvice dired-readin
+      (after dired-after-updating-hook first () activate)
+    "Sort dired listings with directories first before adding marks."
+    (dired-sort-dirs-first))
 
 
   ;; Indenting guide
