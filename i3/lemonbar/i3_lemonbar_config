@@ -67,9 +67,9 @@ color_icon="$color_fglight"     # For icons
 color_clockbg="$color_bglight"  # Color for clock
 color_clockfg="$color_fgdark"   # Color for clock
 
-color_success="$c_green_l"      # Positive color for good times
-color_warning="$c_yellow_l"     # Yellow color for warnings (eg, low battery)
-color_critical="$c_red_l"       # Red color for critical meters
+color_success="$c_green_d"      # Positive color for good times
+color_warning="$c_yellow_d"     # Yellow color for warnings (eg, low battery)
+color_critical="$c_red_d"       # Red color for critical meters
 
 #default space between sections
 # stab='  '

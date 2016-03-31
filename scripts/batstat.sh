@@ -17,9 +17,9 @@ if [ -e "/sys/class/power_supply/BAT0" ]; then
 
   if [[ $CAPACITY -gt 98 ]]; then
     STATUS="F";
-  elif [[ $CAPACITY -lt 10 ]]; then
+  elif [[ $CAPACITY -lt 5 ]]; then
     STATUS="C"
-  elif [[ $CAPACITY -lt 25 ]]; then
+  elif [[ $CAPACITY -lt 10 ]]; then
     STATUS="L"
   fi
 

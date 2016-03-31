@@ -116,16 +116,13 @@ while read -r line ; do
 
       if [[ ${bat_arr[2]} == "L" ]]; then
         oln="${color_warning}"
-        bkg="${color_bgdarkhl}"
       elif [[ ${bat_arr[2]} == "C" ]]; then
         oln="${color_critical}"
-        bkg="${color_critical}"
       elif [[ ${bat_arr[2]} == "F" ]]; then
         oln="${color_success}"
-        bkg="${color_bgdarkhl}"
       fi
 
-      batamt="%{+u U${oln} B${bkg}} %{F${frg} T2} ${ico} %{T1}${bat_arr[0]}%  %{-u B-}"
+      batamt="%{+u U${oln}} %{F${frg} T2} ${ico} %{T1}${bat_arr[0]}%  %{-u}"
       ;;
 
     WSP*)
@@ -161,6 +158,6 @@ while read -r line ; do
   # And finally, output
   printf "%s%s%s\n" \
     "%{U${color_accent1} l}${wsp}" \
-    "%{c}${title}" \
-    "%{r}${net}${stab}${cpu}${stab}${mem}${stab}${vol}${stab}${batamt}${date}${stab}${time}"
+    "%{r}${title}" \
+    "%{Sl r}${net}${stab}${cpu}${stab}${mem}${stab}${vol}${stab}${batamt}${date}${stab}${time}"
 done
