@@ -48,6 +48,10 @@ node_modules
 .idea/
 
 
+## Emacs
+.#*
+
+
 ## OS
 *~
 .DS_Store
