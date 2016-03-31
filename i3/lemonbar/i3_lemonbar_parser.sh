@@ -2,15 +2,11 @@
 #
 # Input parser for i3 bar
 
-# config
+# Load config
 . $(dirname $0)/i3_lemonbar_config
 
-# min init
-irc_n_high=0
-# title="%{F${color_head} B${color_sec_b2} T3}${sep_right}%{F${color_head} B${color_sec_b2}}%{T2} ${icon_prog} %{F${color_sec_b2} B- T3}${sep_right}%{F- B- T1}"
-title="%{F${color_head} B${color_sec_b2} T2} ${icon_prog} %{T1}"
 
-# parser
+# Parser
 while read -r line ; do
   case $line in
     SYS*)
@@ -29,25 +25,24 @@ while read -r line ; do
 
       # date
       date="${sys_arr[0]} ${sys_arr[1]} ${sys_arr[2]}"
-      date="%{B${color_bgdarkhl} T2}%{A:gsimplecal:}   ${icon_calendar} %{T1} ${date} %{F- B-}%{A}"
+      date="%{A:gsimplecal:} ${icon_calendar} ${date} %{A}"
 
       # time
-      time="%{T2}${icon_clock}  %{T1}${sys_arr[3]}   %{F- B-}"
+      time=" ${icon_clock} ${sys_arr[3]} "
 
       # cpu
-      cpu="%{T2}${icon_cpu}  %{T1}${sys_arr[4]}% %{F- B-}"
+      cpu=" ${icon_cpu} ${sys_arr[4]}% "
 
       # mem
-      mem="%{T2}${icon_mem}  %{T1}${sys_arr[5]} %{F- B-}"
+      mem=" ${icon_mem} ${sys_arr[5]} "
 
       # wlan/eth
       if [ "${sys_arr[8]}" != "down" ] && [ "${sys_arr[9]}" != "down" ]; then
-        net="%{F${c_green_d} T2}${icon_wlan} %{T1}${sys_arr[8]} @ ${sys_arr[9]}% %{F- B-}"
+        net="%{F${c_green_d}} ${icon_wlan} ${sys_arr[8]} @ ${sys_arr[9]}% %{F-}"
       elif [ "${sys_arr[10]}" != "down" ] && [ "${sys_arr[11]}" != "down" ]; then
-        # net="%{F${c_green_d} T2}${icon_eth} %{T1}${sys_arr[10]} @ ${sys_arr[11]}KiB/s %{F- B-}"
-        net="%{F${c_green_d} T2}${icon_eth} %{T1}${sys_arr[10]} %{F- B-}"
+        net="%{F${c_green_d}} ${icon_eth} ${sys_arr[10]} %{F-}"
       else
-        net="%{F${c_red_d} T2}${icon_wlan} ${icon_eth} %{T1} D/C %{F- B-}"
+        net="%{F${c_red_d}} ${icon_wlan} ${icon_eth} D/C %{F-}"
       fi
       ;;
 
@@ -61,8 +56,8 @@ while read -r line ; do
       vol_ico=$icon_vol
       vol_txt=${vol_arr[1]}
       if [[ ${vol_arr[0]} == "M" ]]; then
-        vol_frg=${color_fgdark}
-        vol_ico="${icon_mute}  "
+        vol_frg=${c_yellow_d}
+        vol_ico=$icon_mute
       fi
       vol_l_click="pavucontrol &"
       vol_m_click="~/scripts/lemon_volume.sh M"
@@ -70,18 +65,7 @@ while read -r line ; do
       vol_s_up="~/scripts/lemon_volume.sh +"
       vol_s_down="~/scripts/lemon_volume.sh -"
       # TODO: Fix volume controls, now only l_click and s_down works :S
-      vol="%{B- F${vol_frg} T2}%{A1:${vol_l_click}:}%{A2:${vol_m_click}:}%{A3:${vol_r_click}:}%{A4:${vol_s_up}:}%{A5:${vol_s_down}:}${vol_ico} %{T1} ${vol_txt}% %{F- B- A}"
-      ;;
-
-    GMA*)
-      # Gmail
-      gmail="${line#???}"
-      if [ "${gmail}" != "0" ]; then
-        mail_cback=${color_mail}; mail_cicon=${color_back}; mail_cfore=${color_back}
-      else
-        mail_cback=${color_sec_b1}; mail_cicon=${color_icon}; mail_cfore=${color_fore}
-      fi
-      gmail="%{F${mail_cback}}${sep_left}%{F${mail_cicon} B${mail_cback}} %{T2}${icon_mail}%{F${mail_cfore} T1} ${gmail}"
+      vol="%{F${vol_frg} A1:${vol_l_click}: A2:${vol_m_click}: A3:${vol_r_click}: A4:${vol_s_up}: A5:${vol_s_down}:}${vol_ico} ${vol_txt}% %{F- A A A A A}"
       ;;
 
     MPD*)
@@ -94,8 +78,7 @@ while read -r line ; do
       else
         song="${line#???}";
       fi
-      mpd="%{T2}${icon_music} %{F- T1}  ${song}"
-      # echo "Setting music display to ${song}" >> bar.log
+      mpd=" ${icon_music} ${song} "
       ;;
 
     BAT*)
@@ -106,13 +89,13 @@ while read -r line ; do
       bat_arr=(${line#???})
       bat_icons=($icon_battery)
       if [[ ${bat_arr[1]} == "C" ]]; then
-        ico="${icon_charging} "
+        ico="${icon_charging}"
       else
         ico="${bat_icons[$(((${bat_arr[0]}*(${#bat_icons[@]}-1))/100))]}"
       fi
       bkg=-
       frg="${color_fglight}"
-      oln="${bkg}"
+      oln="${color_back}"
 
       if [[ ${bat_arr[2]} == "L" ]]; then
         oln="${color_warning}"
@@ -122,26 +105,26 @@ while read -r line ; do
         oln="${color_success}"
       fi
 
-      batamt="%{+u U${oln}} %{F${frg} T2} ${ico} %{T1}${bat_arr[0]}%  %{-u}"
+      batamt="%{+u U${oln} F${frg}} ${ico} ${bat_arr[0]}% %{-u}"
       ;;
 
     WSP*)
       # I3 Workspaces
-      wsp="%{F${color_fglight} B${color_bgdark} T1}"
+      wsp="%{F${color_fglight} B${color_bgdark}}"
       set -- ${line#???}
       while [ $# -gt 0 ] ; do
         case $1 in
          FOC*)
-           wsp="${wsp}%{+u B${color_bgdarkhl} U${color_accent1} T1}  ${1#???}  %{-u B${color_bgdark} F${color_fglight}}"
+           wsp="${wsp}%{F${color_accent1text} B${color_accent1}}  ${1#???}  %{F${color_fglight} B${color_bgdark}}"
            ;;
          ACT*)
-           wsp="${wsp}%{+u B${color_bgdarkhl} U${color_accentd} T1}  ${1#???}  %{-u B${color_bgdark} F${color_fglight}}"
+           wsp="${wsp}%{+u U${color_accent2}}  ${1#???}  %{-u U-}"
            ;;
          INA*)
-           wsp="${wsp}%{F${color_fgdark} T1}  ${1#???}  "
+           wsp="${wsp}%{F${color_fgdark}}  ${1#???}  %{F${color_fglight}}"
            ;;
          URG*)
-           wsp="${wsp}%{F${color_fglight} B${c_red_d} T1}  ${1#???}  "
+           wsp="${wsp}%{F${color_fglight} B${color_critical}}  ${1#???}  %{F${color_fglight} B${color_bgdark}}"
            ;;
         esac
         shift
@@ -150,14 +133,15 @@ while read -r line ; do
 
     WIN*)
       # window title
-      title=" %{+u F- B- U${c_blue_d} T1} ${line#???} %{-u U-}"
+      title=" %{+u U${c_cyan_d}}  ${line#???}  %{-u U-}"
       ;;
 
   esac
 
   # And finally, output
-  printf "%s%s%s\n" \
-    "%{U${color_accent1} l}${wsp}" \
-    "%{r}${title}" \
-    "%{Sl r}${net}${stab}${cpu}${stab}${mem}${stab}${vol}${stab}${batamt}${date}${stab}${time}"
+  printf "%s%s%s%s\n" \
+    "%{l}  ${wsp}" \
+    "%{Sf c}${title}" \
+    "%{Sl c}${title}" \
+    "%{r}${net}${stab}${cpu}${stab}${mem}${stab}${vol}${stab}${batamt}${date}${stab}${time}  "
 done

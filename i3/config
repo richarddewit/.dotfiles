@@ -130,11 +130,11 @@ assign [class="(?i)Google-chrome"] → $ws2
 assign [class="(?i)Chromium"] → $ws2
 assign [class="(?i)Thg"] → $ws4
 assign [class="(?i)Pidgin"] → $ws7
-assign [class="(?i)Nylas N1"] → $ws8
+assign [class="(?i)Thunderbird"] → $ws8
 assign [class="(?i)Wine"] → $ws9
 
 # fix graphics glitch
-new_window none
+new_window pixel
 
 # Open specific applications in floating mode
 for_window [window_role="pop-up"] floating enable
@@ -156,9 +156,9 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+d exec --no-startup-id killall dunst; exec --no-startup-id notify-send 'restart dunst'
 
 # Volume control
-bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/scripts/volume_control.py down 5
-bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/scripts/volume_control.py up 5
-bindsym XF86AudioMute exec --no-startup-id $HOME/scripts/volume_control.py toggle
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/lemon_volume.sh -
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/lemon_volume.sh +
+bindsym XF86AudioMute exec --no-startup-id ~/scripts/lemon_volume.sh M
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -214,7 +214,7 @@ bar {
 
 # Colors
 # Type            border       bg           text            indicator
-client.focused    $c_blue_d    $c_blue_l    $c_foreground
+client.focused    $c_green_d   $c_green_l   $c_foreground
 client.unfocused  $c_black_l   $c_black_d   $c_foreground
 client.urgent     $c_red_l     $c_red_d     $c_foreground
 

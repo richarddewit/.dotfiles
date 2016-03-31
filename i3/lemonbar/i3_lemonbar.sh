@@ -24,14 +24,13 @@ xtitle -s | sed -un 's/\(.*\)/WIN\1/p' > "${panel_fifo}" &
 $(dirname $0)/i3_workspaces.sh > ${panel_fifo} &
 
 # Conky, "SYS"
-conky -c $(dirname $0)/i3_lemonbar_conky > "${panel_fifo}" &
+conky -c $(dirname $0)/i3_lemonbar_conky.conf > "${panel_fifo}" &
 
 ### UPDATE INTERVAL METERS
 cnt_vol=${upd_vol}
 cnt_mail=${upd_mail}
 cnt_mpd=${upd_mpd}
 cnt_bat=${upd_bat}
-# cnt_ssid=${upd_ssid}
 
 while :; do
 
