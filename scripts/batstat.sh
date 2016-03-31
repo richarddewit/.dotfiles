@@ -8,7 +8,7 @@ if [ -e "/sys/class/power_supply/BAT0" ]; then
   # Get charging status
   CHARGING="D"
 
-  if [[ `cat /sys/class/power_supply/AC0/online` -eq 1 ]]; then
+  if [[ `cat /sys/class/power_supply/ADP1/online` -eq 1 ]]; then
     CHARGING="C"
   fi
 
