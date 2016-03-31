@@ -46,7 +46,7 @@ case $tod in
     fg="$c_black_d"
     ;;
   "Evening")
-    bg="$c_background"
+    bg="$c_black_l"
     fg="$c_yellow_d"
     ;;
   "Night")
@@ -55,11 +55,13 @@ case $tod in
     ;;
 esac
 
-width=`xrandr | grep "*" | sed -r 's/\s*([0-9]+)\s*x\s*([0-9]+).*/\1/g' | head -n 1`
-height=`xrandr | grep "*" | sed -r 's/\s*([0-9]+)\s*x\s*([0-9]+).*/\2/g' | tail -n 1`
+# xrand_out=`xrandr | grep -Ei " connected (primary )?[0-9]*x[0-9]*"`
+# width=`echo $xrand_out | sed -E 's/.* connected (primary )?([0-9]+)x([0-9]+).*/\2/' | head -n 1`
+# height=`echo $xrand_out | sed -E 's/.* connected (primary )?([0-9]+)x([0-9]+).*/\3/' | tail -n 1`
 lines=8
 font_size=18
-line_height=`echo $font_size | awk '{print int($1*1.5)}'`
-padding=$((($height-($lines*$line_height+48))/2))
-rofi -dmenu -i -show run -width $width -fg "#$fg" -bg "#$bg" -hlbg "#$fg" -hlfg "#$bg" -bc "#$c_background" -location 0 -lines $lines -bw 0 -font "Hack $font_size" -padding $padding -separator-style none -opacity 85
+# line_height=`echo $font_size | awk '{print int($1*1.5)}'`
+# padding=$((($height-($lines*$line_height+48))/2))
+padding=300
+rofi -dmenu -i -show run -fullscreen -hide-scrollbar -fg "#$fg" -bg "#$bg" -hlbg "#$fg" -hlfg "#$bg" -bc "#$c_background" -location 0 -lines $lines -bw 0 -font "Hack $font_size" -padding $padding -separator-style none -opacity 85
 
