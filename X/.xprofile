@@ -2,7 +2,7 @@
 
 compton --config "$HOME/.config/compton/compton.conf" &
 
-[[ -f ~/.Xresources ]] && xrdb -load "$HOME/.Xresources"
+[[ -f $HOME/.Xresources ]] && xrdb -load "$HOME/.Xresources"
 
 xset r rate 200 50
 xsetroot -mod 16 16 -fg '#20282c' -bg '#10181c'
