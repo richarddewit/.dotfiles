@@ -41,3 +41,4 @@ if [ ! -d ~/scripts ]; then
 fi
 
 ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini
+ln -sf ${THIS_PATH}/widgets/gsimplecal.conf ~/.config/gsimplecal/config
