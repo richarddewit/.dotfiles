@@ -5,12 +5,10 @@
     sort = yes
     indicate_hidden = true
     idle_threshold = 0
-    # geometry = "300x5-20+400"
-    geometry = "x20"
+    geometry = "1900x20+10+10"
     alignment = center
     show_age_threshold = 60
     sticky_history = yes
-    # follow = mouse
     word_wrap = yes
     separator_height = 2
     padding = 20
