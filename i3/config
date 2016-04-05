@@ -186,37 +186,71 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# --- APPLY XRES BEGIN
-set $c_magenta_l #9B59B6
-set $c_blue_l #3498DB
-set $c_red_d #E74C3C
-set $c_cyan_d #1ABC9C
-set $c_blue_d #3498DB
-set $c_cursor #E0E0E0
-set $c_red_l #E74C3C
-set $c_green_l #2ECC71
-set $c_background #2C3E50
-set $c_green_d #2ECC71
-set $c_cyan_l #1ABC9C
-set $c_yellow_d #F1C40F
-set $c_foreground #E0E0E0
-set $c_black_l #95A5A6
-set $c_yellow_l #F1C40F
-set $c_black_d #2C3E50
-set $c_white_d #E0E0E0
-set $c_white_l #ECF0F1
-set $c_magenta_d #9B59B6
-# --- APPLY XRES END
+# Color definitions - Base16 Flat
+# http://chriskempson.github.io/base16/#flat
+set $base00 #2C3E50
+set $base01 #34495E
+set $base02 #7F8C8D
+set $base03 #95A5A6
+set $base04 #BDC3C7
+set $base05 #E0E0E0
+set $base06 #F5F5F5
+set $base07 #ECF0F1
+set $base08 #E74C3C
+set $base09 #E67E22
+set $base0A #F1C40F
+set $base0B #2ECC71
+set $base0C #1ABC9C
+set $base0D #3498DB
+set $base0E #9B59B6
+set $base0F #BE643C
+set $black #2C3E50
+set $white #E0E0E0
 
 bar {
-  i3bar_command ~/.i3/lemonbar/i3_lemonbar.sh
+  i3bar_command i3bar -t
+  status_command ~/.i3/status/status.sh
+
+  workspace_buttons yes
+  font pango:Hack, FontAwesome 10
+  separator_symbol "■■"
+  position bottom
+  tray_output primary
+  tray_padding 4
+
+  colors {
+    background $black
+    statusline $white
+    separator  $black
+
+    # Type             border  bg      text
+    focused_workspace  $base0B $base0B $black
+    active_workspace   $base0D $base0D $base04
+    inactive_workspace $base0D $base00 $base02
+    urgent_workspace   $base09 $base08 $white
+  }
 }
 
+# bar {
+#   # status_command ~/.i3/titlebar.sh
+#   status_command xtitle -s
+#
+#   workspace_buttons no
+#   position top
+#   tray_output none
+#
+#   colors {
+#     background $black
+#     statusline $base0C
+#     separator  $black
+#   }
+# }
+
 # Colors
-# Type            border       bg           text            indicator
-client.focused    $c_green_d   $c_green_l   $c_foreground
-client.unfocused  $c_black_l   $c_black_d   $c_foreground
-client.urgent     $c_red_l     $c_red_d     $c_foreground
+# Type            border  bg      text    indicator
+client.focused    $base0B $base0B $white $base0D
+client.unfocused  $base03 $base02 $white
+client.urgent     $base09 $base08 $white
 
 hide_edge_borders true
 

@@ -35,6 +35,9 @@ ln -sf ${THIS_PATH}/i3/dunstrc ~/.config/dunst/dunstrc
 if [ ! -d ~/.i3/lemonbar ]; then
   ln -sf ${THIS_PATH}/i3/lemonbar ~/.i3/lemonbar
 fi
+if [ ! -d ~/.i3/status ]; then
+  ln -sf ${THIS_PATH}/i3/status ~/.i3/status
+fi
 
 if [ ! -d ~/scripts ]; then
   ln -sf ${THIS_PATH}/scripts ~/scripts
