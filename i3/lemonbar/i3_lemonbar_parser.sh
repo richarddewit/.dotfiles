@@ -64,7 +64,6 @@ while read -r line ; do
       vol_r_click="killall pavucontrol"
       vol_s_up="~/scripts/lemon_volume.sh +"
       vol_s_down="~/scripts/lemon_volume.sh -"
-      # TODO: Fix volume controls, now only l_click and s_down works :S
       vol="%{F${vol_frg} A1:${vol_l_click}: A2:${vol_m_click}: A3:${vol_r_click}: A4:${vol_s_up}: A5:${vol_s_down}:}${vol_ico} ${vol_txt}% %{F- A A A A A}"
       ;;
 

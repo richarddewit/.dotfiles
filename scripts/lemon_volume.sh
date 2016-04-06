@@ -19,4 +19,4 @@ case $1 in
     ;;
 esac
 
-echo "VOL`~/scripts/volume_status.sh`" > /tmp/i3_lemonbar_$USER
+echo "VOL`$HOME/scripts/alsa_status.sh`" > /tmp/i3_lemonbar_$USER

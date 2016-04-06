@@ -505,10 +505,14 @@ command! -nargs=0 Pulse call s:Pulse()
 
 " GUI settings  ------------------------------------------------------------{{{
 
+  " Neovim-qt Guifont command
+  command -nargs=? Guifont call rpcnotify(0, 'Gui', 'SetFont', "<args>") | let g:Guifont="<args>"
+  Guifont Hack:h9
+
   if has('gui_running')
       " GUI Vim
 
-      set guifont=Hack:h12
+      set guifont=Hack:h9
 
       " Remove all the UI cruft
       set go-=T

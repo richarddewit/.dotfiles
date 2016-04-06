@@ -208,21 +208,20 @@ set $black #2C3E50
 set $white #E0E0E0
 
 bar {
-  workspace_buttons yes
   i3bar_command i3bar -t
-  status_command ~/.i3/conky_status.sh
+  status_command ~/.i3/status/status.sh
 
+  workspace_buttons yes
   font pango:Hack, FontAwesome 10
   separator_symbol "■■"
   position bottom
   tray_output primary
   tray_padding 4
 
-
   colors {
-    separator  $black
     background $black
     statusline $white
+    separator  $black
 
     # Type             border  bg      text
     focused_workspace  $base0B $base0B $black
@@ -232,17 +231,20 @@ bar {
   }
 }
 
-bar {
-  workspace_buttons no
-  position top
-  status_command xtitle -s
-
-  colors {
-    separator  $black
-    background $black
-    statusline $white
-  }
-}
+# bar {
+#   # status_command ~/.i3/titlebar.sh
+#   status_command xtitle -s
+#
+#   workspace_buttons no
+#   position top
+#   tray_output none
+#
+#   colors {
+#     background $black
+#     statusline $base0C
+#     separator  $black
+#   }
+# }
 
 # Colors
 # Type            border  bg      text   indicator
