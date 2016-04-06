@@ -1,0 +1,150 @@
+{
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Proton - Spacemacs and style editing in Atom. ;;
+  ;; https://github.com/dvcrn/proton               ;;
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; This is your main proton configuration file
+  ;; While using proton, all atom related configuration has to go inside here
+  ;; Everything that is not set up through this file will get wiped on start
+  ;; We gave you some cool defaults below but if you don't like it, feel free to change :)
+
+  ;; Layers you wish to have active
+  ;; To get a list of all available layers, check github.com/dvcrn/proton/layers/
+  :layers [
+    ;; -----------------------------------
+    ;; Core layer. Don't remove.
+    ;; -----------------------------------
+    :core
+
+
+    ;; -----------------------------------
+    ;; Tools
+    ;; Get more at github.com/dvcrn/proton/tree/master/src/proton/layers/tools
+    ;; -----------------------------------
+    :tools/git
+    :tools/linter
+    ;; :tools/bookmarks
+    ;; :tools/build
+    :tools/minimap
+
+
+    ;; -----------------------------------
+    ;; Languages
+    ;; Get more at github.com/dvcrn/proton/tree/master/src/proton/layers/lang
+    ;; -----------------------------------
+    :lang/clojure ;; for this file :)
+    ;; :lang/csharp
+    :lang/python
+    ;; :lang/julia
+    ;; :lang/latex
+    ;; :lang/elixir
+    :lang/markdown
+    ;; :lang/rust
+    :lang/javascript
+
+
+    ;; -----------------------------------
+    ;; Frameworks
+    ;; Get more at github.com/dvcrn/proton/tree/master/src/proton/layers/frameworks
+    ;; -----------------------------------
+    :frameworks/django
+  ]
+
+
+  ;; Packages that are not part of a layer. List them here as keyword
+  ;; All packages will be ensured to be installed. Stuff that is not listed here
+  ;; Will get uninstalled so choose wisely!
+  :additional-packages [
+    :atom-hg
+    :pigments
+    :language-qml
+  ]
+
+
+  ;; Packages that you want to disable.
+  ;; Note that packages will be removed except bundled packages.
+  ;; Bundled packages will be disabled instead.
+  ;; Use this configuration instead of atom's `core.disabledPackages`
+  :disabled-packages [
+		:background-tips
+		:bookmarks
+    :metrics
+		:package-generator
+		:spell-check
+		:welcome
+  ]
+
+
+  ;; Proton takes over your atom configuration. All settings that are not listed here will get wiped
+  ;; Configurations are denoted as 2 element vector consisting of k/v
+  ;; sub-vectors inside v will get treated like javascript arrays
+  :configuration [
+    ;; Core
+    ["core.audioBeep" false]
+    ["core.autoHideMenuBar" true]
+    ["core.ignoredNames" (
+			".git" ".hg" ".svn"	".DS_Store"
+			"._*" "Thumbs.db" "desktop.ini"
+			".idea" ".hgcheck" "*.pyc"
+      ".vagrant" "node_modules"
+      ".tern-port"
+    )]
+
+
+    ;; Editor
+    ["editor.fontFamily" "Hack"]
+    ["editor.fontSize" 10]
+    ["editor.lineHeight" 1.5]
+		["editor.backUpBeforeSaving" true]
+		["editor.scrollPastEnd" true]
+		["editor.showIndentGuide" true]
+
+
+    ;; Theme and syntax
+    ["core.themes" ["one-dark-ui" "atom-dark-fusion-syntax"]]
+
+    ["one-dark-ui.fontSize" 10]
+    ["one-dark-ui.layoutMode" "Spacious"]
+
+
+    ;; Package settings
+    ["autosave.enabled" true]
+
+    ["linter.errorPanelHeight" 80]
+
+    ["minimap.scrollAnimation" true]
+    ["minimap.scrollAnimationDuration" 150]
+
+    ["python-yapf.yapfPath" "/usr/local/bin/yapf"]
+
+    ["tree-view.hideIgnoredNames" true]
+
+
+    ;; Proton configuration
+    ["proton.core.showTabBar" true]
+    ["proton.core.relativeLineNumbers" true]
+
+    ;; Prefer classic vim mode over vim-mode-plus? Change this to :vim-mode
+    ["proton.core.vim-provider" :vim-mode-plus]
+  ]
+
+  ;; Don't like a keybinding or want to add something yourself? Do it here
+  :keybindings {
+    :s {:category "search/select"
+        :s {:action "find-and-replace:show" :title "find and replace"}}
+  }
+
+  ;; Want some custom behavior inside a certain window?
+  ;; Add your own nifty things here!
+  :keymaps [
+    {:selector ".tree-view" :keymap [["escape" "tree-view:toggle"]]}
+    ;; Want to rebind ESC to something else? You can do that here.
+    ;; If you are good with esc, just remove the following line.
+    ;; {:selector "atom-text-editor.vim-mode-plus.insert-mode" :keymap [["f d" "vim-mode-plus:activate-normal-mode"]]}
+    {:selector "atom-text-editor.vim-mode-plus.normal-mode" :keymap [["[ e" "editor:move-line-up"]
+                                                                     ["] e" "editor:move-line-down"]]}
+    {:selector "atom-text-editor.vim-mode-plus.visual-mode" :keymap [["[ e" "editor:move-line-up"]
+                                                                     ["] e" "editor:move-line-down"]]}
+  ]
+}

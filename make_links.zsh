@@ -4,7 +4,7 @@ THIS_PATH=`dirname $0:A`
 echo "Creating symlinks..."
 echo
 
-# Create necessary folders in config dir
+# Create necessary folders
 mkdir -p ~/{.i3,.config/{nvim,compton,dunst,gtk-3.0}}
 
 ln -sf ${THIS_PATH}/zsh/.zshenv ~/.zshenv
@@ -19,6 +19,11 @@ ln -sf ${THIS_PATH}/vcs/.hgrc ~/.hgrc
 ln -sf ${THIS_PATH}/vim/.vimrc ~/.vimrc
 ln -sf ${THIS_PATH}/nvim/init.vim ~/.config/nvim/init.vim
 ln -sf ${THIS_PATH}/emacs/.spacemacs ~/.spacemacs
+
+ln -sf ${THIS_PATH}/atom/.proton ~/.proton
+ln -sf ${THIS_PATH}/atom/init.coffee ~/.atom/init.coffee
+ln -sf ${THIS_PATH}/atom/snippets.cson ~/.atom/snippets.cson
+ln -sf ${THIS_PATH}/atom/styles.less ~/.atom/styles.less
 
 ln -sf ${THIS_PATH}/shell/.profile ~/.profile
 ln -sf ${THIS_PATH}/X/.xinitrc ~/.xinitrc
@@ -46,3 +51,5 @@ fi
 
 ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini
 ln -sf ${THIS_PATH}/widgets/gsimplecal.conf ~/.config/gsimplecal/config
+
+echo "OK done"

@@ -1,0 +1,113 @@
+@import "../../.atom/packages/atom-dark-fusion-syntax/styles/colors.less";
+
+@yellow: #E2F783;
+@ani: .2s ease-out;
+
+
+atom-text-editor {
+  // Enable ligatures
+  text-rendering: optimizeLegibility;
+}
+
+// To style other content in the text editor's shadow DOM, use the ::shadow expression
+atom-text-editor::shadow {
+  .cursor {
+    border-color: yellow;
+    transition: opacity @ani, background-color @ani, border-color @ani;
+  }
+  .block-cursor {
+    background-color: yellow;
+  }
+
+  .blink-off {
+    .cursor, .block-cursor {
+      opacity: 0;
+    }
+  }
+
+  .cursor-line {
+    background-color: rgba(100, 100, 100, 0.3);
+  }
+
+  // this, self, constructor
+  .variable.language,
+  .entity.name.function.constructor.js {
+    color: @yellow;
+    font-weight: bold;
+  }
+
+  // this, self, constructor
+  .keyword.control, .storage.modifier, .storage.type {
+    font-weight: bold;
+  }
+
+  .entity.function {
+    color: @yellow;
+  }
+
+  .string {
+    &, &.punctuation.begin, &.punctuation.end {
+      color: @green;
+    }
+  }
+
+}
+
+linter-panel {
+  padding: 2px;
+}
+linter-message {
+  font-size: 9px;
+  line-height: 1.4;
+}
+.linter-message-item {
+  margin: 1px;
+}
+
+
+// Vim-mode cursor styles
+.vim-mode, .vim-mode-plus {
+  &::shadow {
+    .cursor {
+      opacity: 0.4;
+
+      .insert-mode& {
+        border-color: cyan !important;
+        opacity: 1;
+      }
+      .normal-mode& {
+        background-color: lawngreen !important;
+      }
+      .visual-mode& {
+        background-color: orange !important;
+      }
+      .operator-pending-mode& {
+        border-color: yellow !important;
+      }
+    }
+
+    .blink-off .cursor {
+      .insert-mode& {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+// Proton-mode
+.proton-mode {
+  atom-text-editor::shadow .cursor {
+    opacity: 0 !important;
+  }
+}
+
+.proton-which-key {
+  font-size: 11px;
+
+  .flex-container {
+    height: 120px;
+    .flex-item {
+      width: 250px;
+    }
+  }
+}
