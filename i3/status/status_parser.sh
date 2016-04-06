@@ -99,7 +99,7 @@ while read -r line ; do
       fi
 
       bat="${icon} ${bat_arr[0]}%"
-      printf -v bat "text_color_str" "$bat" "$color"
+      printf -v bat "$text_color_str" "$bat" "$color"
       ;;
 
     VOL*)
@@ -126,9 +126,17 @@ while read -r line ; do
       printf -v vol "$text_color_str" "$vol" "$color"
       ;;
 
+    WIN*)
+      # window title
+      title="${line#???}"
+      if [ ${#title} -gt "$max_title_len" ]; then
+        title=`echo "$title" | cut -c 1-"$max_title_len"`...
+      fi
+      printf -v title "$text_str" "$title"
+      ;;
+
   esac
 
-  # echo "${net}${cpu}${mem}${vol}${batamt}${date}${time}"
-  echo "[${net}${cpu}${mem}${disk_root}${disk_home}${vol}${bat}${date}${time}${last_empty}],"
+  echo "[${title}${net}${cpu}${mem}${disk_root}${disk_home}${vol}${bat}${date}${time}${last_empty}],"
 done
 
