@@ -50,17 +50,26 @@ while read -r line ; do
       printf -v mem "$text_color_str" "$mem" "$color"
 
       # disk
-      disk_root="${icon_disk}${icon_linux} ${disk_root_free}"
+      if [[ "$disk_root_free" = "$disk_home_free" ]]; then
+        # Most probably the same disk
+        disk_root="${icon_disk} ${disk_root_free}"
+
+        disk_home=""
+      else
+        # Home is a separate partition
+        disk_root="${icon_disk}${icon_linux} ${disk_root_free}"
+
+        disk_home="${icon_disk}${icon_home} ${disk_home_free}"
+        color="$white"
+        [ "$disk_home_used_perc" -ge "$disk_warning_threshold" ] && color="$base0A"
+        [ "$disk_home_used_perc" -ge "$disk_critical_threshold" ] && color="$base08"
+        printf -v disk_home "$text_color_str" "$disk_home" "$color"
+      fi
       color="$white"
       [ "$disk_root_used_perc" -ge "$disk_warning_threshold" ] && color="$base0A"
       [ "$disk_root_used_perc" -ge "$disk_critical_threshold" ] && color="$base08"
       printf -v disk_root "$text_color_str" "$disk_root" "$color"
 
-      disk_home="${icon_disk}${icon_home} ${disk_home_free}"
-      color="$white"
-      [ "$disk_home_used_perc" -ge "$disk_warning_threshold" ] && color="$base0A"
-      [ "$disk_home_used_perc" -ge "$disk_critical_threshold" ] && color="$base08"
-      printf -v disk_home "$text_color_str" "$disk_home" "$color"
 
       # wlan/eth
       if [ "$wifi_ssid" != "down" ] && [ "$wifi_sig" != "down" ]; then
@@ -127,12 +136,14 @@ while read -r line ; do
       ;;
 
     WIN*)
-      # window title
+      # Window title
       title="${line#???}"
+      # Fix JSON error when it has double quotes
+      title=`echo "$title" | sed -r 's/\"/\\\"/g'`
       if [ ${#title} -gt "$max_title_len" ]; then
-        title=`echo "$title" | cut -c 1-"$max_title_len"`...
+        title=`echo "$title" | cut -c 1-"$max_title_len" | iconv -c`...
       fi
-      printf -v title "$text_str" "$title"
+      printf -v title "$text_color_str" "$title" "$base0C"
       ;;
 
   esac
