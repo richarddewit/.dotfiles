@@ -23,7 +23,7 @@ echo '[],'
 conky -c $(dirname $0)/conky_status.conf > ${status_fifo} &
 
 # Window title, "WIN"
-xtitle -s | sed -un 's/\(.*\)/WIN\1/p' > "${status_fifo}" &
+xtitle -s -e -t $max_title_len | sed -un 's/\(.*\)/WIN\1/p' > "${status_fifo}" &
 
 # Update intervals
 count_vol=${upd_vol}

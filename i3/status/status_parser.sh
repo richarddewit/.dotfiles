@@ -138,11 +138,7 @@ while read -r line ; do
     WIN*)
       # Window title
       title="${line#???}"
-      # Fix JSON error when it has double quotes
-      title=`echo "$title" | sed -r 's/\"/\\\"/g'`
-      if [ ${#title} -gt "$max_title_len" ]; then
-        title=`echo "$title" | cut -c 1-"$max_title_len" | iconv -c`...
-      fi
+      title=$(echo "$title" | sed "s/\\\'/'/g")
       printf -v title "$text_color_str" "$title" "$base0C"
       ;;
 
