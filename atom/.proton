@@ -24,8 +24,6 @@
     ;; -----------------------------------
     :tools/git
     :tools/linter
-    ;; :tools/bookmarks
-    ;; :tools/build
     :tools/minimap
 
 
@@ -34,13 +32,8 @@
     ;; Get more at github.com/dvcrn/proton/tree/master/src/proton/layers/lang
     ;; -----------------------------------
     :lang/clojure ;; for this file :)
-    ;; :lang/csharp
     :lang/python
-    ;; :lang/julia
-    ;; :lang/latex
-    ;; :lang/elixir
     :lang/markdown
-    ;; :lang/rust
     :lang/javascript
 
 
@@ -67,12 +60,12 @@
   ;; Bundled packages will be disabled instead.
   ;; Use this configuration instead of atom's `core.disabledPackages`
   :disabled-packages [
-		:background-tips
-		:bookmarks
+    :background-tips
+    :bookmarks
     :metrics
-		:package-generator
-		:spell-check
-		:welcome
+    :package-generator
+    :spell-check
+    :welcome
   ]
 
 
@@ -84,21 +77,22 @@
     ["core.audioBeep" false]
     ["core.autoHideMenuBar" true]
     ["core.ignoredNames" (
-			".git" ".hg" ".svn"	".DS_Store"
-			"._*" "Thumbs.db" "desktop.ini"
-			".idea" ".hgcheck" "*.pyc"
+      ".git" ".hg" ".svn"	".DS_Store"
+      "._*" "Thumbs.db" "desktop.ini"
+      ".idea" ".hgcheck" "*.pyc"
       ".vagrant" "node_modules"
       ".tern-port"
     )]
 
 
     ;; Editor
-    ["editor.fontFamily" "Hack"]
+    ["editor.fontFamily" "Input"]
+    ;; ["editor.fontFamily" "Hack"]
     ["editor.fontSize" 10]
     ["editor.lineHeight" 1.5]
-		["editor.backUpBeforeSaving" true]
-		["editor.scrollPastEnd" true]
-		["editor.showIndentGuide" true]
+    ["editor.backUpBeforeSaving" true]
+    ["editor.scrollPastEnd" true]
+    ["editor.showIndentGuide" true]
 
 
     ;; Theme and syntax
@@ -112,6 +106,7 @@
     ["autosave.enabled" true]
 
     ["linter.errorPanelHeight" 80]
+    ["linter-pep8.maxLineLength" 80]
 
     ["minimap.scrollAnimation" true]
     ["minimap.scrollAnimationDuration" 150]
@@ -143,8 +138,8 @@
     ;; If you are good with esc, just remove the following line.
     ;; {:selector "atom-text-editor.vim-mode.insert-mode" :keymap [["f d" "vim-mode:activate-normal-mode"]]}
     {:selector "atom-text-editor.vim-mode.normal-mode" :keymap [["[ e" "editor:move-line-up"]
-                                                                     ["] e" "editor:move-line-down"]]}
+                                                                ["] e" "editor:move-line-down"]]}
     {:selector "atom-text-editor.vim-mode.visual-mode" :keymap [["[ e" "editor:move-line-up"]
-                                                                     ["] e" "editor:move-line-down"]]}
+                                                                ["] e" "editor:move-line-down"]]}
   ]
 }
