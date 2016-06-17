@@ -4,7 +4,8 @@ source $DOTFILES/zsh/exports.zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="bullet-train"
+# ZSH_THEME="bullet-train"
+ZSH_THEME="rw"
 
 source $DOTFILES/zsh/autostarts.zsh
 
