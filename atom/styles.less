@@ -94,6 +94,24 @@ linter-message {
   }
 }
 
+.status-bar-vim-mode-normal {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: lawngreen !important;
+}
+
+.status-bar-vim-mode-visual {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: orange !important;
+}
+
+.status-bar-vim-mode-insert {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: cyan !important;
+}
+
 // Proton-mode
 .proton-mode {
   atom-text-editor::shadow .cursor {
@@ -103,11 +121,4 @@ linter-message {
 
 .proton-which-key {
   font-size: 11px;
-
-  .flex-container {
-    height: 120px;
-    .flex-item {
-      width: 250px;
-    }
-  }
 }
