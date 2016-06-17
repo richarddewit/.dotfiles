@@ -27,7 +27,7 @@ chmod +x ./make_links.zsh
 ./nvim/install.zsh &&
 ./make_links.zsh
 
-wget http://raw.github.com/caiogondim/bullet-train-oh-my-zsh-theme/master/bullet-train.zsh-theme -O $ZSH/themes/bullet-train.zsh-theme
+git clone https://github.com/richarddewit/rw.zsh-theme.git $ZSH_CUSTOM/themes/rw.zsh-theme
 sudo wget https://raw.githubusercontent.com/clvv/fasd/master/fasd -O /usr/bin/fasd
 sudo chmod +x /usr/bin/fasd
 
