@@ -71,8 +71,8 @@ CRITICAL_LIMIT="5"
 # if battery is discharging
 if [ "$STAT" == "Discharging" ]; then
   if [ $PERCENT -le "$(echo $CRITICAL_LIMIT)" ]; then
-    notify-send -u critical "Battery level critical" "$MESSAGE"
-  elif [ $PERCENT -le "$(echo $WARNING_LIMIT)" ]; then
-    notify-send -u normal "Battery level low" "$MESSAGE"
+    notify-send -a "Power Management" -u critical "Battery level critical" "$MESSAGE"
+  # elif [ $PERCENT -le "$(echo $WARNING_LIMIT)" ]; then
+    # notify-send -u normal "Battery level low" "$MESSAGE"
   fi
 fi
