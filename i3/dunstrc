@@ -18,21 +18,21 @@
 
 
 [shortcuts]
-    close = mod4+shift+x
-    close_all = mod4+shift+ctrl+x
+    close = mod4+x
+    close_all = mod4+shift+x
     history = mod4+grave
 
 [urgency_low]
-    background = "#34495E"
-    foreground = "#E0E0E0"
+    background = "#969896"
+    foreground = "#c5c8c6"
     timeout = 10
 
 [urgency_normal]
-    background = "#3498DB"
-    foreground = "#E0E0E0"
+    background = "#81a2be"
+    foreground = "#c5c8c6"
     timeout = 10
 
 [urgency_critical]
-    background = "#E74C3C"
-    foreground = "#E0E0E0"
+    background = "#cc6666"
+    foreground = "#c5c8c6"
     timeout = 0

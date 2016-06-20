@@ -145,7 +145,6 @@ for_window [window_role=".*(?i)Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-for_window [title="alsamixer"] floating enable border pixel 2
 for_window [class="Galculator"] floating enable border pixel 2
 for_window [class="GParted"] floating enable border normal
 
@@ -153,7 +152,7 @@ for_window [class="GParted"] floating enable border normal
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-bindsym $mod+Shift+d exec --no-startup-id killall dunst; exec --no-startup-id notify-send 'restart dunst'
+bindsym $mod+Shift+d exec --no-startup-id killall dunst; exec --no-startup-id notify-send -a 'i3' 'restart dunst'
 
 # Volume control
 bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/lemon_volume.sh -
@@ -186,26 +185,28 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Color definitions - Base16 Flat
-# http://chriskempson.github.io/base16/#flat
-set $base00 #2C3E50
-set $base01 #34495E
-set $base02 #7F8C8D
-set $base03 #95A5A6
-set $base04 #BDC3C7
-set $base05 #E0E0E0
-set $base06 #F5F5F5
-set $base07 #ECF0F1
-set $base08 #E74C3C
-set $base09 #E67E22
-set $base0A #F1C40F
-set $base0B #2ECC71
-set $base0C #1ABC9C
-set $base0D #3498DB
-set $base0E #9B59B6
-set $base0F #BE643C
-set $black #2C3E50
-set $white #E0E0E0
+# set_from_resource $<name> <resource_name> <fallback>
+set_from_resource $c_foreground foreground #E0E0E0
+set_from_resource $c_background background #2C3E50
+
+
+set_from_resource $c_black_d   color0  #2C3E50
+set_from_resource $c_red_d     color1  #E74C3C
+set_from_resource $c_green_d   color2  #2ECC71
+set_from_resource $c_yellow_d  color3  #F1C40F
+set_from_resource $c_blue_d    color4  #3498DB
+set_from_resource $c_magenta_d color5  #9B59B6
+set_from_resource $c_cyan_d    color6  #1ABC9C
+set_from_resource $c_white_d   color7  #E0E0E0
+
+set_from_resource $c_black_l   color8  #95A5A6
+set_from_resource $c_red_l     color9  #E74C3C
+set_from_resource $c_green_l   color10 #2ECC71
+set_from_resource $c_yellow_l  color11 #F1C40F
+set_from_resource $c_blue_l    color12 #3498DB
+set_from_resource $c_magenta_l color13 #9B59B6
+set_from_resource $c_cyan_l    color14 #1ABC9C
+set_from_resource $c_white_l   color15 #ECF0F1
 
 bar {
   i3bar_command i3bar -t
@@ -220,38 +221,24 @@ bar {
   tray_padding 4
 
   colors {
-    background $black
-    statusline $white
-    separator  $black
+    background $c_background
+    statusline $c_foreground
+    separator  $c_background
 
     # Type             border  bg      text
-    focused_workspace  $base0B $base0B $black
-    active_workspace   $base0D $base0D $base04
-    inactive_workspace $base0D $base00 $base02
-    urgent_workspace   $base09 $base08 $white
+    focused_workspace  $c_green_l     $c_green_l     $c_background
+    active_workspace   $c_blue_l      $c_blue_l      $c_foreground
+    inactive_workspace $c_blue_l      $c_background  $c_black_l
+    urgent_workspace   $c_red_d       $c_red_d       $c_foreground
   }
 }
 
-# bar {
-#   # status_command ~/.i3/titlebar.sh
-#   status_command xtitle -s
-#
-#   workspace_buttons no
-#   position top
-#   tray_output none
-#
-#   colors {
-#     background $black
-#     statusline $base0C
-#     separator  $black
-#   }
-# }
-
 # Colors
-# Type            border  bg      text   indicator
-client.focused    $base0B $base0B $white $base0D
-client.unfocused  $base03 $base02 $white
-client.urgent     $base09 $base08 $white
+# Type                  border        bg           text           indicator
+client.focused          $c_green_l    $c_green_l   $c_foreground  $c_blue_d
+client.unfocused        $c_black_l    $c_black_l   $c_foreground
+client.urgent           $c_red_d      $c_red_d     $c_foreground
+client.background       $c_background
 
 hide_edge_borders true
 
@@ -260,21 +247,24 @@ gaps inner 20
 gaps outer 0
 
 # Custom bindings
-bindsym $mod+x workspace back_and_forth
 bindsym $mod+Tab workspace back_and_forth
 bindsym Control+mod1+l exec sh ~/.i3/i3lock.sh
 bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_screenshot.png' -e 'mv $f ~/Pictures/screenshots/'
 
 # Startup applications
-exec_always --no-startup-id numlockx on
+exec_always --no-startup-id "numlockx on"
+exec --no-startup-id "feh --bg-fill ~/Pictures/wallpaper.jpg"
+exec --no-startup-id "compton --config '~/.config/compton/compton.conf' &"
+exec --no-startup-id "xset r rate 200 50"
+exec --no-startup-id "setxkbmap -option 'caps:ctrl_modifier'"
+exec --no-startup-id "xcape -e 'Caps_Lock=Escape'"
 exec --no-startup-id "dunst -conf ~/.i3/dunstrc"
-exec --no-startup-id nitrogen --restore
 
 # Shutdown mode
-set $mode_system System (l) lock, (e) logout, (s) suspend, (r) reboot, (q) shutdown
+set $mode_system "System (L)ock, (E)xit, (S)uspend, (R)eboot, (Q)uit/shutdown"
 set $i3exit ~/.i3/i3exit.sh
 
-mode "$mode_system" {
+mode $mode_system {
     bindsym l exec --no-startup-id $i3exit lock, mode "default"
     bindsym e exec --no-startup-id $i3exit logout, mode "default"
     bindsym s exec --no-startup-id $i3exit suspend, mode "default"
@@ -285,4 +275,4 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+BackSpace mode "$mode_system"
+bindsym $mod+BackSpace mode $mode_system
