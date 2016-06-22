@@ -50,6 +50,15 @@ case "$1" in
         exit 2
 esac
 
-[ $(echo -e "NO\nYES" | dmenu -nb "#2C3E50" -nf "#E0E0E0" -sb "#E74C3C" -sf "#E0E0E0" -i -p "Do you really want to $1?") = "YES" ] && action
+XRES=`cat ~/.Xresources`
+get_xres_color() {
+    echo `echo "$XRES" | grep "#define $1" | awk '{print \$3}'`
+}
+
+C_FOREGROUND=$(get_xres_color "base05")
+C_BACKGROUND=$(get_xres_color "base00")
+C_RED=$(get_xres_color "base08")
+
+[ $(echo -e "NO\nYES" | dmenu -nb "$C_BACKGROUND" -nf "$C_FOREGROUND" -sb "$C_RED" -sf "$C_FOREGROUND" -i -p "Do you really want to $1?") = "YES" ] && action
 
 exit 0
