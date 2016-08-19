@@ -21,7 +21,9 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-# Set Caps Lock to be an additional Ctrl
-setxkbmap -option 'caps:ctrl_modifier'
-# Set all Ctrls to behave like Esc when tapped
-xcape -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape'
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/bin/core_perl"
+
+export EDITOR="nvim"
+export VISUAL="atom"
+
+export TZ="/usr/share/zoneinfo/Europe/Amsterdam"

@@ -25,7 +25,8 @@ values."
      ;; ----------------------------------------------------------------
 
      ;; 1 General layers
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t)
      colors
      ;; org
      (shell :variables
@@ -60,11 +61,7 @@ values."
                       version-control-diff-tool 'git-gutter
                       version-control-global-margin t)
      ;; 11 Tools
-     fasd
-     ranger
-     ;; vagrant
      ;; 12 Vim
-     ;; evil-commentary
      unimpaired
      vim-powerline
      ;; 13 Window management
@@ -117,7 +114,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(darktooth
+   dotspacemacs-themes '(gruvbox
+                         darktooth
                          ujelly
                          spacemacs-dark
                          niflheim
@@ -241,8 +239,6 @@ layers configuration. You are free to put any user code."
   (setq
    vc-follow-symlinks t
    require-final-newline t
-   scroll-margin 20
-   ;; frame-title-format "Spacemacs %* %f"
    frame-title-format '("Spacemacs  %*  "
                         (:eval (if (buffer-file-name)
                                    (abbreviate-file-name (buffer-file-name))
@@ -253,18 +249,13 @@ layers configuration. You are free to put any user code."
   (global-company-mode t)
   (global-git-gutter-mode t)
   (global-flycheck-mode t)
-  (linum-relative-global-mode t)
-  (highlight-indentation-mode t)
-  ;; (spacemacs/toggle-highlight-current-line-globally-off)
-  ;; (spacemacs/toggle-automatic-symbol-highlight-on)
-  ;; (spacemacs/toggle-transparent-frame)
 
   ;; Specific modes for specific files
   (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
   (add-to-list 'auto-mode-alist '("\\.*.eslintrc\\'" . json-mode))
 
 
-  ;; Hooks
+  ;; HOOKS
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'python-mode-hook
             (lambda ()
@@ -275,7 +266,7 @@ layers configuration. You are free to put any user code."
             (setq-local emmet-expand-jsx-className? t)))
 
 
-  ;; Autosave on buffer/window/frame switch
+  ;; AUTOSAVE ON BUFFER/WINDOW/FRAME SWITCH
   (defun save-buffer-if-needed ()
     (interactive)
     (when (and (buffer-file-name) (buffer-modified-p))
@@ -289,7 +280,7 @@ layers configuration. You are free to put any user code."
     (when buffer-file-name (save-buffer-if-needed)))
 
 
-  ;; Hide ignored folders/files
+  ;; HIDE IGNORED FOLDERS/FILES
   (defadvice completion--file-name-table (after
                                           ignoring-backups-f-n-completion
                                           activate)
@@ -321,7 +312,7 @@ layers configuration. You are free to put any user code."
     (dired-sort-dirs-first))
 
 
-  ;; Indenting guide
+  ;; INDENTING GUIDE
   (indent-guide-global-mode)
 
   (setq-default
@@ -364,7 +355,7 @@ layers configuration. You are free to put any user code."
   (setup-indentation)
 
 
-  ;; Disable mouse
+  ;; DISABLE MOUSE
   (defun silence ()
     (interactive))
 
@@ -377,6 +368,7 @@ layers configuration. You are free to put any user code."
   ;; Disable scrolling
   (define-key evil-motion-state-map [mouse-4] 'silence)
   (define-key evil-motion-state-map [mouse-5] 'silence)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will

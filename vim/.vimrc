@@ -44,7 +44,7 @@
 
 " Packages  ----------------------------------------------------------------{{{
 " Colorscheme & visual stuff
-  NeoBundle 'mhartington/oceanic-next'
+  NeoBundle 'morhetz/gruvbox'
   NeoBundle 'Yggdroot/indentLine'
   NeoBundle 'Raimondi/delimitMate'
   NeoBundle 'valloric/MatchTagAlways'
@@ -222,7 +222,11 @@
   noremap <Leader>; :TComment<Cr>
 
   " Faster save
-  nnoremap <Leader>w :w<CR>
+  nnoremap <Leader>fs :w<CR>
+  nnoremap <Leader>qq :q<CR>
+
+  " Save as sudo
+  cmap w!! w !sudo tee > /dev/null %
 
 " Copy to clipboard
   vmap <Leader>y "+y
@@ -255,7 +259,7 @@
 " Theme
   set t_Co=256
   syntax enable
-  colorscheme OceanicNext
+  colorscheme gruvbox
   set background=dark
 " highlightt the current line number
   hi CursorLineNR guifg=#ffffff
@@ -274,7 +278,7 @@
 
 " vim-airline  -------------------------------------------------------------{{{
   let g:airline_powerline_fonts = 1
-  let g:airline_theme = 'oceanicnext'
+  let g:airline_theme = 'gruvbox'
   let g:airline#extensions#tabline#fnamemod = ':t'
   let g:airline#extensions#tabline#enabled = 1
   set hidden
