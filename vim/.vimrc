@@ -140,6 +140,7 @@
   set ignorecase " smartcase needs ignorecase
   set smartcase
 
+  set title
   set encoding=utf-8
   setglobal fileencoding=utf-8
 " Currently needed for neovim paste issue
