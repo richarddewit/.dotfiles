@@ -5,7 +5,7 @@ echo "Creating symlinks..."
 echo
 
 # Create necessary folders
-mkdir -p ~/{.i3,.config/{nvim,compton,dunst,gtk-3.0}}
+mkdir -p ~/{.i3,.config/{nvim,compton,dunst,gtk-3.0,termite}}
 
 ln -sf ${THIS_PATH}/zsh/.zshenv ~/.zshenv
 ln -sf ${THIS_PATH}/zsh/.zshrc ~/.zshrc
@@ -51,5 +51,6 @@ fi
 
 ln -sf ${THIS_PATH}/gtk3/settings.ini ~/.config/gtk-3.0/settings.ini
 ln -sf ${THIS_PATH}/widgets/gsimplecal.conf ~/.config/gsimplecal/config
+ln -sf ${THIS_PATH}/termite/config ~/.config/termite/config
 
 echo "OK done"
