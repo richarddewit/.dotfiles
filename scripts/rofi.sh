@@ -1,26 +1,35 @@
-# --- APPLY XRES BEGIN
-c_background="2C3E50"
-c_green_l="2ECC71"
-c_magenta_d="9B59B6"
-c_black_l="95A5A6"
-c_foreground="E0E0E0"
-c_blue_d="3498DB"
-c_magenta_l="9B59B6"
-c_blue_l="3498DB"
-c_white_l="ECF0F1"
-c_green_d="2ECC71"
-c_yellow_d="F1C40F"
-c_cursor="E0E0E0"
-c_cyan_l="1ABC9C"
-c_white_d="E0E0E0"
-c_cyan_d="1ABC9C"
-c_red_d="E74C3C"
-c_red_l="E74C3C"
-c_yellow_l="F1C40F"
-c_black_d="2C3E50"
-# --- APPLY XRES END
+# Colors Base16 Tomorrow
+c_foreground="c5c8c6"
+c_background="1d1f21"
+
+c_black_d="1d1f21"
+c_black_l="969896"
+c_white_d="c5c8c6"
+c_white_l="ffffff"
+
+c_red_d="cc6666"
+c_red_l="cc6666"
+c_green_d="b5bd68"
+c_green_l="b5bd68"
+c_yellow_d="f0c674"
+c_yellow_l="f0c674"
+c_blue_d="81a2be"
+c_blue_l="81a2be"
+c_magenta_d="b294bb"
+c_magenta_l="b294bb"
+c_cyan_d="8abeb7"
+c_cyan_l="8abeb7"
 
 tod=`~/scripts/timeofday.sh`
+
+# Uncomment a tod to test
+# tod="Late Night"
+# tod="Early Morning"
+# tod="Morning"
+# tod="Afternoon"
+# tod="Late Afternoon"
+# tod="Evening"
+# tod="Night"
 
 bg="$c_background"  # Default background for undefined times of day
 fg="$c_foreground"
@@ -55,13 +64,20 @@ case $tod in
     ;;
 esac
 
-# xrand_out=`xrandr | grep -Ei " connected (primary )?[0-9]*x[0-9]*"`
-# width=`echo $xrand_out | sed -E 's/.* connected (primary )?([0-9]+)x([0-9]+).*/\2/' | head -n 1`
-# height=`echo $xrand_out | sed -E 's/.* connected (primary )?([0-9]+)x([0-9]+).*/\3/' | tail -n 1`
-lines=8
-font_size=18
-# line_height=`echo $font_size | awk '{print int($1*1.5)}'`
-# padding=$((($height-($lines*$line_height+48))/2))
-padding=300
-rofi -dmenu -i -show run -fullscreen -hide-scrollbar -fg "#$fg" -bg "#$bg" -hlbg "#$fg" -hlfg "#$bg" -bc "#$c_background" -location 0 -lines $lines -bw 0 -font "Hack $font_size" -padding $padding -separator-style none -opacity 85
-
+# rofi -dmenu -i -show run -fullscreen -hide-scrollbar -fg "#$fg" -bg "#$bg" -hlbg "#$fg" -hlfg "#$bg" -bc "#$c_background" -location 0 -lines 8 -bw 0 -font "Hack 20" -padding 400 -separator-style none -opacity 85
+rofi \
+  -dmenu \
+  -i \
+  -show run \
+  -p 'λ ' \
+  -fullscreen \
+  -hide-scrollbar \
+  -color-window "#$bg, #$fg, #$fg" \
+  -color-normal "#$bg, #$fg, #$bg, #$fg, #$bg" \
+  -location 0 \
+  -lines 8 \
+  -bw 5 \
+  -font "Hack 20" \
+  -padding 300 \
+  -separator-style dash \
+  -opacity 85
