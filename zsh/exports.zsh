@@ -5,5 +5,6 @@ export ZSH="$HOME/.oh-my-zsh"
 export LANG=en_US.UTF-8
 
 export EDITOR="nvim"
+export SUDO_EDITOR="nvim"
 
 export NVM_DIR="$HOME/.nvm"
