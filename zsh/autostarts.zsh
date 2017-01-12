@@ -2,10 +2,10 @@
 [ -s "/usr/bin/fasd" ] && eval "$(fasd --init auto)"
 
 # kiex - Elixir version manager
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
+[ -s "$HOME/.kiex/scripts/kiex" ] && . "$HOME/.kiex/scripts/kiex"
 
-# Node Version Manager: NVM
+# nvm: Node Version Manager
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 # Virtualenvwrapper
-source /usr/local/bin/virtualenvwrapper.sh
+[ -s /usr/local/bin/virtualenvwrapper.sh ] && . /usr/local/bin/virtualenvwrapper.sh
