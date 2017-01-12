@@ -14,7 +14,7 @@ source ~/.vimrc
 " Neovim specific settings -------------------------------------------------{{{
 
 " Neovim Settings
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  " let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " Keep my terminal window open when I navigate away
