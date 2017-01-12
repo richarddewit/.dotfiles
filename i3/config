@@ -18,7 +18,7 @@ font pango:Hack, FontAwesome 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id gnome-terminal
+bindsym $mod+Return exec --no-startup-id termite
 
 # kill focused window
 bindsym $mod+q kill
@@ -132,6 +132,7 @@ assign [class="(?i)Thg"] → $ws4
 assign [class="(?i)Pidgin"] → $ws7
 assign [class="(?i)Thunderbird"] → $ws8
 assign [class="(?i)Wine"] → $ws9
+assign [class="qemu-system-x86_64"] → $ws10
 
 # fix graphics glitch
 new_window pixel
@@ -167,10 +168,10 @@ mode "resize" {
     # Pressing right will grow the window’s width.
     # Pressing up will shrink the window’s height.
     # Pressing down will grow the window’s height.
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym h resize shrink width 10 px or 10 ppt
+    bindsym j resize grow height 10 px or 10 ppt
+    bindsym k resize shrink height 10 px or 10 ppt
+    bindsym l resize grow width 10 px or 10 ppt
 
     # same bindings, but for the arrow keys
     bindsym Left resize shrink width 10 px or 10 ppt
@@ -185,28 +186,50 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# set_from_resource $<name> <resource_name> <fallback>
-set_from_resource $c_foreground foreground #E0E0E0
-set_from_resource $c_background background #2C3E50
+# Colors Base16 Flat
+# set $c_foreground #E0E0E0
+# set $c_background #2C3E50
+#
+# set $c_black_d   #2C3E50
+# set $c_black_l   #95A5A6
+# set $c_white_d   #E0E0E0
+# set $c_white_l   #ECF0F1
+#
+# set $c_red_d     #E74C3C
+# set $c_red_l     #E74C3C
+# set $c_green_d   #2ECC71
+# set $c_green_l   #2ECC71
+# set $c_yellow_d  #F1C40F
+# set $c_yellow_l  #F1C40F
+# set $c_blue_d    #3498DB
+# set $c_blue_l    #3498DB
+# set $c_magenta_d #9B59B6
+# set $c_magenta_l #9B59B6
+# set $c_cyan_d    #1ABC9C
+# set $c_cyan_l    #1ABC9C
 
+# Colors Base16 Tomorrow
+set $c_foreground #c5c8c6
+set $c_background #1d1f21
 
-set_from_resource $c_black_d   color0  #2C3E50
-set_from_resource $c_red_d     color1  #E74C3C
-set_from_resource $c_green_d   color2  #2ECC71
-set_from_resource $c_yellow_d  color3  #F1C40F
-set_from_resource $c_blue_d    color4  #3498DB
-set_from_resource $c_magenta_d color5  #9B59B6
-set_from_resource $c_cyan_d    color6  #1ABC9C
-set_from_resource $c_white_d   color7  #E0E0E0
+set $c_black_d   #1d1f21
+set $c_black_l   #969896
+set $c_white_d   #c5c8c6
+set $c_white_l   #ffffff
 
-set_from_resource $c_black_l   color8  #95A5A6
-set_from_resource $c_red_l     color9  #E74C3C
-set_from_resource $c_green_l   color10 #2ECC71
-set_from_resource $c_yellow_l  color11 #F1C40F
-set_from_resource $c_blue_l    color12 #3498DB
-set_from_resource $c_magenta_l color13 #9B59B6
-set_from_resource $c_cyan_l    color14 #1ABC9C
-set_from_resource $c_white_l   color15 #ECF0F1
+set $c_red_d     #cc6666
+set $c_red_l     #cc6666
+set $c_green_d   #b5bd68
+set $c_green_l   #b5bd68
+set $c_yellow_d  #f0c674
+set $c_yellow_l  #f0c674
+set $c_blue_d    #81a2be
+set $c_blue_l    #81a2be
+set $c_magenta_d #b294bb
+set $c_magenta_l #b294bb
+set $c_cyan_d    #8abeb7
+set $c_cyan_l    #8abeb7
+
 
 bar {
   i3bar_command i3bar -t
@@ -214,7 +237,7 @@ bar {
 
   workspace_buttons yes
   strip_workspace_numbers yes
-  font pango:Hack, FontAwesome 10
+  font pango:Hack, FontAwesome 9
   separator_symbol "■■"
   position bottom
   tray_output primary
@@ -227,7 +250,7 @@ bar {
 
     # Type             border  bg      text
     focused_workspace  $c_green_l     $c_green_l     $c_background
-    active_workspace   $c_blue_l      $c_blue_l      $c_foreground
+    active_workspace   $c_blue_l      $c_blue_l      $c_background
     inactive_workspace $c_blue_l      $c_background  $c_black_l
     urgent_workspace   $c_red_d       $c_red_d       $c_foreground
   }
@@ -243,8 +266,8 @@ client.background       $c_background
 hide_edge_borders true
 
 # Set inner/outer gaps
-gaps inner 20
-gaps outer 0
+gaps inner 10
+gaps outer 10
 
 # Custom bindings
 bindsym $mod+Tab workspace back_and_forth
@@ -253,7 +276,8 @@ bindsym Print exec scrot '%Y-%m-%d-%T_$wx$h_screenshot.png' -e 'mv $f ~/Pictures
 
 # Startup applications
 exec_always --no-startup-id "numlockx on"
-exec --no-startup-id "feh --bg-fill ~/Pictures/wallpaper.jpg"
+exec --no-startup-id "xrdb ~/.Xresources"
+exec --no-startup-id "~/.screenlayout/screenlayout.sh && feh --bg-fill ~/Pictures/wallpaper.jpg"
 exec --no-startup-id "compton --config '~/.config/compton/compton.conf' &"
 exec --no-startup-id "xset r rate 200 50"
 exec --no-startup-id "setxkbmap -option 'caps:ctrl_modifier'"
