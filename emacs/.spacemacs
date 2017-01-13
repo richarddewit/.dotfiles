@@ -472,6 +472,116 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq
+   vc-follow-symlinks t
+   require-final-newline t
+   frame-title-format '("Spacemacs  %*  "
+                        (:eval (if (buffer-file-name)
+                                   (abbreviate-file-name (buffer-file-name))
+                                 "%b")))
+   js2-include-node-externs t
+   )
+
+  (global-company-mode t)
+  (global-git-gutter-mode t)
+  (global-flycheck-mode t)
+
+  ;; Specific modes for specific files
+  (add-to-list 'auto-mode-alist '("\\.*.zsh\\'" . shell-mode))
+  (add-to-list 'auto-mode-alist '("\\.*.eslintrc\\'" . json-mode))
+
+
+  ;; HOOKS
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+
+  ;; AUTOSAVE ON BUFFER/WINDOW/FRAME SWITCH
+  (defun save-buffer-if-needed ()
+    (interactive)
+    (when (and (buffer-file-name) (buffer-modified-p))
+      (save-buffer)))
+
+  (defadvice switch-to-buffer (before save-buffer-now activate)
+    (when buffer-file-name (save-buffer-if-needed)))
+  (defadvice other-window (before other-window-now activate)
+    (when buffer-file-name (save-buffer-if-needed)))
+  (defadvice other-frame (before other-frame-now activate)
+    (when buffer-file-name (save-buffer-if-needed)))
+
+
+  ;; HIDE IGNORED FOLDERS/FILES
+  (defadvice completion--file-name-table (after
+                                          ignoring-backups-f-n-completion
+                                          activate)
+    "Filter out results when they match `completion-ignored-extensions'."
+    (let ((res ad-return-value))
+      (if (and (listp res)
+               (stringp (car res))
+               (cdr res))                 ; length > 1, don't ignore sole match
+          (setq ad-return-value
+                (completion-pcm--filename-try-filter res)))))
+
+  ;; Dired - hide ignored folders/files
+  (eval-after-load "dired" '(require 'dired-x))
+  (add-hook 'dired-mode-hook (lambda () (dired-omit-mode 1)))
+
+
+  ;; Dired - sort folders first
+  (defun dired-sort-dirs-first ()
+    "Sort dired listings with directories first."
+    (save-excursion
+      (let (buffer-read-only)
+        (forward-line 2) ;; beyond dir. header
+        (sort-regexp-fields t "^.*$" "[ ]*." (point) (point-max)))
+      (set-buffer-modified-p nil)))
+
+  (defadvice dired-readin
+      (after dired-after-updating-hook first () activate)
+    "Sort dired listings with directories first before adding marks."
+    (dired-sort-dirs-first))
+
+
+  ;; INDENTING GUIDE
+  (indent-guide-global-mode)
+
+  (setq-default
+   ;; js2-mode
+   js2-basic-offset 2
+   ;; web-mode
+   css-indent-offset 2
+   web-mode-markup-indent-offset 2
+   web-mode-css-indent-offset 2
+   web-mode-code-indent-offset 2
+   web-mode-attr-indent-offset 2)
+
+  (with-eval-after-load 'web-mode
+    (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+    (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
+
+
+  ;; Indentation from
+  ;; http://blog.binchen.org/posts/easy-indentation-setup-in-emacs-for-web-development.html
+  (defun set-indent-level (n)
+    ;; web development
+    (setq coffee-tab-width n) ; coffeescript
+    (setq javascript-indent-level n) ; javascript-mode
+    (setq js-indent-level n) ; js-mode
+    (setq js2-basic-offset n) ; js2-mode
+    (setq web-mode-markup-indent-offset n) ; web-mode, html tag in html file
+    (setq web-mode-css-indent-offset n) ; web-mode, css in html file
+    (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
+    (setq css-indent-offset n) ; css-mode
+    )
+
+  (defun setup-indentation ()
+    (interactive)
+    (message "Indentation set to two")
+    (setq indent-tabs-mode nil) ; use space instead of tab
+    (set-indent-level 2) ; indent 2 spaces width
+    )
+
+  (setup-indentation)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
