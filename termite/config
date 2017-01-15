@@ -1,5 +1,36 @@
 [options]
+allow_bold = true
+audible_bell = false
+clickable_url = true
+dynamic_title = true
 font = Hack 9
+# fullscreen = true
+# geometry = 640x480
+icon_name = terminal
+mouse_autohide = true
+scroll_on_output = false
+scroll_on_keystroke = true
+scrollback_lines = 10000
+# search_wrap = true
+urgent_on_bell = true
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+# browser = xdg-open
+
+# "system", "on" or "off"
+cursor_blink = on
+
+# "block", "underline" or "ibeam"
+cursor_shape = ibeam
+
+# Hide links that are no longer valid in url select overlay mode
+# filter_unmatched_urls = true
+
+# Emit escape sequences for extra modified keys
+# modify_other_keys = false
+
+# set size hints for the window
+# size_hints = false
 
 [colors]
 # Base16 Tomorrow Night
@@ -9,6 +40,8 @@ foreground      = #c5c8c6
 foreground_bold = #e0e0e0
 cursor          = #e0e0e0
 background      = rgba(23, 31, 33, 0.9)
+
+highlight = #b294bb
 
 # 16 color space
 
