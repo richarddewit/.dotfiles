@@ -54,6 +54,6 @@ C_FOREGROUND=`get_xres_color "base05"`
 C_BACKGROUND=`get_xres_color "base00"`
 C_RED=`get_xres_color "base08"`
 
-[ `echo "NO\nYES" | dmenu -nb "$C_BACKGROUND" -nf "$C_FOREGROUND" -sb "$C_RED" -sf "$C_FOREGROUND" -i -p "Do you really want to $1?"` = "YES" ] && action
+[ `echo "NO\nYES" | dmenu -nb "$C_BACKGROUND" -nf "$C_FOREGROUND" -sb "$C_RED" -sf "$C_FOREGROUND" -fn "Terminus-8" -i -p "Do you really want to $1?"` = "YES" ] && action
 
 exit 0
