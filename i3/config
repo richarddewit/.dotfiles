@@ -12,7 +12,7 @@ set $mod Mod4
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
 # font pango:DejaVu Sans Mono 10
-font pango:Hack, FontAwesome 10
+font pango:Terminus, FontAwesome 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -237,7 +237,7 @@ bar {
 
   workspace_buttons yes
   strip_workspace_numbers yes
-  font pango:Hack, FontAwesome 9
+  font pango:Terminus, FontAwesome 8
   separator_symbol "■■"
   position bottom
   tray_output primary
@@ -258,9 +258,9 @@ bar {
 
 # Colors
 # Type                  border        bg           text           indicator
-client.focused          $c_green_l    $c_green_l   $c_foreground  $c_blue_d
+client.focused          $c_green_l    $c_green_l   $c_background  $c_blue_d
 client.unfocused        $c_black_l    $c_black_l   $c_foreground
-client.urgent           $c_red_d      $c_red_d     $c_foreground
+client.urgent           $c_red_d      $c_red_d     $c_background
 client.background       $c_background
 
 hide_edge_borders true

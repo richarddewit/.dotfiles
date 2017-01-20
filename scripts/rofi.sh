@@ -77,7 +77,7 @@ rofi \
   -location 0 \
   -lines 8 \
   -bw 5 \
-  -font "Hack 20" \
+  -font "Terminus bold 24" \
   -padding 300 \
   -separator-style dash \
   -opacity 85
